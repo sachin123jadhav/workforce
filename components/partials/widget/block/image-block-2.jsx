@@ -1,3 +1,5 @@
+import Greetings from "../Greetings";
+
 const ImageBlock2 = () => {
   return (
     <div
@@ -8,7 +10,7 @@ const ImageBlock2 = () => {
     >
       <div>
         <h4 className="text-xl font-medium text-white mb-2">
-          <span className="block font-normal">Good evening,</span>
+          <span className="block font-normal text-lg"> <Greetings/> </span>
           <span className="block">Mr. Parmeshwar</span>
         </h4>
         <p className="text-sm text-white font-normal">Welcome to Workforce</p>

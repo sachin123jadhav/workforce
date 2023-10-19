@@ -733,3 +733,79 @@ export const files = [
   },
   
 ];
+
+
+export const userData = [
+  {
+    id:1,
+    title: "Active Users",
+    count: "212",
+    bg: "bg-gradient-to-r from-[#1d976c] to-[#2fd38a]",
+    iconColor: "text-[#1d976c]",
+    icon: "fa:users",
+  },
+  {
+    id:2,
+    title: "Not Logged In",
+    count: "35",
+    bg: "bg-gradient-to-r from-[#664dc9] to-[#664dc999]",
+    iconColor: "text-[#664dc9]",
+    icon: "fa6-solid:users-slash",
+  },
+  {
+    id:3,
+    title: "On Leave",
+    count: "05",
+    bg: "bg-gradient-to-r from-[#4669fa] to-[#4669fa]",
+    iconColor: "text-[#fa5420]",
+    icon: "gis:globe-users",
+  },
+  
+];
+
+
+
+export const newHires = [
+  {
+    id:1,
+    name: 'Parmeshwar',
+    title: 'Software Engineer',
+    image:'./assets/images/avatar/parmeshwar.jpg',
+  },
+  {
+    id:2,
+    name: 'Siddhesh',
+    title: 'Frontend Developer',
+    image:'./assets/images/avatar/siddhesh.jpg',
+  },
+  {
+    id:3,
+    name: 'Amol',
+    title: 'Admin',
+    image:'./assets/images/avatar/user.jpeg',
+  },
+  
+];
+
+
+export const upcomingHolidays = [
+  {
+    id:1,
+    name: 'Dussehra',
+    date: '24 Oct',
+    
+  },
+  {
+    id:2,
+    name: 'Diwali',
+    date: '12 Nov',
+    
+  },
+  {
+    id:3,
+    name: 'Bhai Duj',
+    date: '15 Nov',
+    
+  },
+  
+];
