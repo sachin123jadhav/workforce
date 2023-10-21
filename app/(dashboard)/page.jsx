@@ -25,7 +25,10 @@ import Button from "@/components/ui/Button";
 import Modal from "@/components/ui/Modal";
 
 import DasboardBlock from "@/components/partials/widget/block/dasboard-block";
-import Simple from "@/components/partials/froms/Simple";
+
+
+
+
 
 const StarterPage = () => {
   return (
@@ -85,7 +88,7 @@ const StarterPage = () => {
           </div>
 
           <div className="2xl:col-span-3 lg:col-span-4 col-span-12 text-center">
-            <Card title="Birthdays">
+            <Card title="Birthdays" headerslot="" >
               {birthdaysData.map((person, id) => (
                 <div
                   key={id}
@@ -150,6 +153,8 @@ const StarterPage = () => {
                 </div>
               ))}
             </Card>
+
+            
           </div>
         </div>
       </div>
