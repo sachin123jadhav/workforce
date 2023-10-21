@@ -12,12 +12,12 @@ function DasboardBlock() {
         {userData.map((item, i) => (
           <Card
             key={i}
-            bodyClass={`pt-4 pb-3 px-4 flex  items-center h-full  ${item.bg}`}
+            bodyClass={`pt-4 pb-3 px-4 flex  items-center h-full  bg-gradient-to-r from-[#054fb9] to-[#0461cf]  ${item.bg} relative`}
           >
             <div className="flex space-x-3 rtl:space-x-reverse w-full h-full items-center">
               <div className="flex-none h-full items-center flex mr-5">
                 <div
-                  className={` h-[70px] w-[70px] rounded-md  flex flex-col items-center justify-center bg-white border text-3xl ${item.iconColor}`}
+                  className={` h-[70px] w-[70px] rounded-md  flex flex-col items-center justify-center bg-white border text-3xl text-[#054fb9] ${item.iconColor}`}
                 >
                   <Icon icon={item.icon}></Icon>
                 </div>
@@ -31,6 +31,9 @@ function DasboardBlock() {
                   <h3 className="text-white">{ item.count}</h3>
                 </div>
               </div>
+              <div className="absolute top-0 right-0 h-full">
+            <img src="/assets/images/all-img/bg.svg" width={'100%'} className="h-full" /> 
+            </div>
             </div>
           </Card>
         ))}
