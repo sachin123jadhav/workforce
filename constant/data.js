@@ -3,7 +3,7 @@ export const menuItems = [
     title: "Dashboard",
     isHide: true,
     icon: "heroicons:home-solid",
-    link: "/",
+    link: "/home",
   },
 
   {

@@ -25,6 +25,8 @@ import Loading from "@/components/Loading";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import useNavbarType from "@/hooks/useNavbarType";
 import { motion, AnimatePresence } from "framer-motion";
+
+
 export default function RootLayout({ children }) {
   const { width, breakpoints } = useWidth();
   const [collapsed] = useSidebar();
@@ -34,6 +36,10 @@ export default function RootLayout({ children }) {
   const [navbarType] = useNavbarType();
   const [isMonoChrome] = useMonoChrome();
   const router = useRouter();
+
+  const { isAuth } = useSelector((state) => state.auth);
+
+
 
   const location = usePathname();
   // header switch class

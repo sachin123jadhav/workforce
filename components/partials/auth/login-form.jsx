@@ -33,9 +33,9 @@ const LoginForm = () => {
       (user) => user.email === data.email && user.password === data.password
     );
     if (user) {
-      dispatch(handleLogin(true));
+      dispatch(handleLogin(false));
       setTimeout(() => {
-        router.push("/custompage");
+        router.push("/home");
       }, 1500);
     } else {
       toast.error("Invalid credentials", {
