@@ -1,6 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { v4 as uuidv4 } from "uuid";
 import { toast } from "react-toastify";
+import axios from "axios";
+import { API_HOST, defaultHeaders } from "@/configs/https";
+import Link from "next/link";
 
 const initialUsers = () => {
   if (typeof window !== "undefined") {
@@ -27,19 +30,18 @@ const initialUsers = () => {
 };
 // save users in local storage
 
-const initialIsAuth = () => {
-  if (typeof window !== "undefined") {
-    const item = window?.localStorage.getItem("isAuth");
-    return item ? JSON.parse(item) : false;
-  }
-  return false;
+const initialIsAuth = {
+  isLoggedIn: false,
+  token: null,
+  id: null,
+  userRole: null,
 };
 
 export const authSlice = createSlice({
   name: "auth",
   initialState: {
     users: initialUsers(),
-    isAuth: initialIsAuth(),
+    isAuth: initialIsAuth,
   },
   reducers: {
     handleRegister: (state, action) => {
@@ -80,11 +82,14 @@ export const authSlice = createSlice({
     },
 
     handleLogin: (state, action) => {
-      state.isAuth = action.payload;
+      state.isAuth.isLoggedIn = true;
+      state.isAuth.token = action.payload.token;
+      state.isAuth.id = action.payload.user_id;
+      state.isAuth.userRole = action.payload.user_role;
       // save isAuth in local storage
-      if (typeof window !== "undefined") {
-        window?.localStorage.setItem("isAuth", JSON.stringify(state.isAuth));
-      }
+
+      // window?.localStorage.setItem("isAuth", JSON.stringify(state.isAuth));
+
       toast.success("User logged in successfully", {
         position: "top-right",
         autoClose: 1500,
@@ -97,17 +102,44 @@ export const authSlice = createSlice({
       });
     },
     handleLogout: (state, action) => {
-      state.isAuth = action.payload;
+      state.isAuth = initialIsAuth;
       // remove isAuth from local storage
-      if (typeof window !== "undefined") {
-        window?.localStorage.removeItem("isAuth");
-      }
       toast.success("User logged out successfully", {
         position: "top-right",
       });
     },
   },
 });
+
+export const LoginAction = (data) => async (dispatch) => {
+  console.log("LoginAction", data);
+  try {
+    const res = await axios({
+      method: "POST",
+      url: API_HOST + "/users/api/v1/login_app/",
+      data: data,
+      headers: defaultHeaders,
+    });
+    // console.log("Login", res.data);
+    dispatch(handleLogin(res.data));
+  } catch (error) {
+    console.log(error);
+    toast.error("Invalid credentials", {
+      position: "top-right",
+      autoClose: 1500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  }
+};
+
+export const Logout = () => (dispatch) => {
+  dispatch(handleLogout());
+};
 
 export const { handleRegister, handleLogin, handleLogout } = authSlice.actions;
 export default authSlice.reducer;
