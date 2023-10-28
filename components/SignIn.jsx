@@ -1,61 +1,80 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
-function SignIn() {
-  const [time, setTime] = useState(0);
-  const [timerRunning, setTimerRunning] = useState(false);
-  const [buttonClicked, setButtonClicked] = useState(false);
-
-  const formatTime = (seconds) => {
-    const hrs = Math.floor(seconds / 3600);
-    const mins = Math.floor((seconds % 3600) / 60);
-    const secs = seconds % 60;
-    return `${String(hrs).padStart(2, '0')}:${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')} Hrs`;
-  };
-
-  const startTimer = () => {
-    if (buttonClicked) {
-      // If "Check Out" was clicked, stop the timer
-      setTimerRunning(false);
-      setButtonClicked(false); // Reset the button click status
-    } else {
-      // If "Check In" was clicked, resume the timer
-      setTimerRunning(true);
-      setButtonClicked(true); // Set the button click status to true
-    }
-  };
+const SignIn = ({ startHours, startMinutes, startSeconds, isStopped }) => {
+  const [elapsedTime, setElapsedTime] = useState(0);
 
   useEffect(() => {
-    let timerInterval;
-
-    if (timerRunning) {
-      timerInterval = setInterval(() => {
-        setTime((prevTime) => prevTime + 1);
+    if (!isStopped) {
+      const startTime = new Date();
+      const interval = setInterval(() => {
+        const currentTime = new Date();
+        const timeDifference = Math.floor((currentTime - startTime) / 1000); // in seconds
+        setElapsedTime(timeDifference);
       }, 1000);
+
+      return () => clearInterval(interval);
     }
+  }, [isStopped]);
 
-    return () => {
-      clearInterval(timerInterval);
-    };
-  }, [timerRunning]);
+  const totalSeconds =
+    startHours * 3600 + startMinutes * 60 + startSeconds + elapsedTime;
 
-  // Apply a class based on the buttonClicked state
-  const buttonClass = buttonClicked ? 'btn btn-danger' : 'btn btn-success';
-
-  // Change the button text based on the buttonClicked state
-  const buttonText = buttonClicked ? 'Check Out' : 'Check In';
+  const hours = Math.floor(totalSeconds / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
 
   return (
     <div>
-      <button
-        className={`font-normal text-lg ${buttonClass}`}
-        onClick={startTimer}
-      >
-        <span className="mdi:clock-outline mr-2"></span>
-        {buttonText}
-      </button>
-      <h3 className="mt-5">{formatTime(time)}</h3>
+      <div className="flex flex-row items-center justify-center mt-10">
+        <div className="w-20 h-20 bg-white rounded-lg flex items-center justify-center m-2 shadow-md">
+          <p className="text-xl font-semibold">{`${hours
+            .toString()
+            .padStart(2, "0")}`}</p>
+        </div>
+        <p className="text-xl font-semibold">:</p>
+        <div className="w-20 h-20 bg-white rounded-lg flex items-center justify-center m-2 shadow-md">
+          <p className="text-xl font-semibold">{`${minutes
+            .toString()
+            .padStart(2, "0")}`}</p>
+        </div>
+        <p className="text-xl font-semibold">:</p>
+        <div className="w-20 h-20 bg-white rounded-lg flex items-center justify-center m-2 shadow-md">
+          <p className="text-xl font-semibold">{`${seconds
+            .toString()
+            .padStart(2, "0")}`}</p>
+        </div>
+      </div>
     </div>
   );
-}
+};
 
 export default SignIn;
+
+const styles = {
+  timerContainer: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 10,
+  },
+  timerBox: {
+    width: 50,
+    height: 50,
+    backgroundColor: "white",
+    borderRadius: 10,
+    alignItems: "center",
+    justifyContent: "center",
+    margin: "0 5px",
+    boxShadow: "0 0 5px rgba(0,0,0,0.2)",
+  },
+  timerText: {
+    fontSize: 24,
+    fontWeight: "600",
+  },
+  colon: {
+    fontSize: 24,
+    fontWeight: "600",
+    margin: "0 2px",
+  },
+};
