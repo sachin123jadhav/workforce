@@ -8,7 +8,7 @@ export const menuItems = [
   {
     title: "Staff",
     isHide: true,
-    icon: "heroicons:home-solid",
+    icon: "heroicons:user-solid",
     link: "/staff",
   },
 
