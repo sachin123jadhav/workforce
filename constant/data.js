@@ -5,6 +5,12 @@ export const menuItems = [
     icon: "heroicons:home-solid",
     link: "/home",
   },
+  {
+    title: "Staff",
+    isHide: true,
+    icon: "heroicons:home-solid",
+    link: "/staff",
+  },
 
   {
     title: "Services",

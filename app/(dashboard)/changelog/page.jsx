@@ -1,4 +1,4 @@
-"use client";
+ "use client";
 import Card from "@/components/ui/Card";
 import Badge from "@/components/ui/Badge";
 import Icon from "@/components/ui/Icon";
