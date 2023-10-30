@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { API_HOST, defaultHeaders } from "@/configs/https";
 import Link from "next/link";
+import { revertAll } from "@/store/actions";
 
 const initialUsers = () => {
   if (typeof window !== "undefined") {
@@ -139,6 +140,7 @@ export const LoginAction = (data) => async (dispatch) => {
 
 export const Logout = () => (dispatch) => {
   dispatch(handleLogout());
+  dispatch(revertAll());
 };
 
 export const { handleRegister, handleLogin, handleLogout } = authSlice.actions;
