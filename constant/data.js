@@ -17,9 +17,8 @@ export const menuItems = [
     icon: "heroicons:qr-code-solid",
     link: "custompage",
     isHide: true,
-    
   },
-  
+
   {
     title: "Leaves Tracker",
     icon: "heroicons:calendar",
@@ -34,7 +33,6 @@ export const menuItems = [
         childtitle: "Leave Applications",
         childlink: "applications",
       },
-       
     ],
   },
   {
@@ -42,7 +40,6 @@ export const menuItems = [
     icon: "heroicons:calendar-days-20-solid",
     link: "#",
     child: [
-      
       {
         childtitle: "Views",
         childlink: "Level-1",
@@ -143,18 +140,26 @@ export const menuItems = [
         childtitle: "Settings",
         childlink: "applications",
       },
-       
     ],
   },
- 
 
-
-
-
-
+  {
+    title: "Company",
+    icon: "heroicons:calendar",
+    isOpen: true,
+    isHide: true,
+    child: [
+      {
+        childtitle: "Company Profile",
+        childlink: "companyprofile",
+      },
+      {
+        childtitle: "Designation",
+        childlink: "designation",
+      },
+    ],
+  },
 ];
-
-
 
 export const topMenu = [
   {
@@ -717,33 +722,30 @@ export const files = [
   },
 ];
 
-
- export const birthdaysData = [
+export const birthdaysData = [
   {
-    id:1,
-    date: '15 Oct',
-    name: 'Parmeshwar',
-    title: 'Software Engineer',
+    id: 1,
+    date: "15 Oct",
+    name: "Parmeshwar",
+    title: "Software Engineer",
   },
   {
-    id:2,
-    date: '18 Oct',
-    name: 'Siddhesh',
-    title: 'Frontend Developer',
+    id: 2,
+    date: "18 Oct",
+    name: "Siddhesh",
+    title: "Frontend Developer",
   },
   {
-    id:3,
-    date: '28 Oct',
-    name: 'Amol',
-    title: 'Admin',
+    id: 3,
+    date: "28 Oct",
+    name: "Amol",
+    title: "Admin",
   },
-  
 ];
-
 
 export const userData = [
   {
-    id:1,
+    id: 1,
     title: "Active Users",
     count: "212",
     bg: "bg-gradient-to-r from-[#1d976c] to-[#2fd38a]",
@@ -751,7 +753,7 @@ export const userData = [
     icon: "fa:users",
   },
   {
-    id:2,
+    id: 2,
     title: "Not Logged In",
     count: "35",
     bg: "bg-gradient-to-r from-[#664dc9] to-[#664dc999]",
@@ -759,59 +761,50 @@ export const userData = [
     icon: "fa6-solid:users-slash",
   },
   {
-    id:3,
+    id: 3,
     title: "On Leave",
     count: "05",
     bg: "bg-gradient-to-r from-[#4669fa] to-[#4669fa]",
     iconColor: "text-[#fa5420]",
     icon: "gis:globe-users",
   },
-  
 ];
-
-
 
 export const newHires = [
   {
-    id:1,
-    name: 'Parmeshwar',
-    title: 'Software Engineer',
-    image:'./assets/images/avatar/parmeshwar.jpg',
+    id: 1,
+    name: "Parmeshwar",
+    title: "Software Engineer",
+    image: "./assets/images/avatar/parmeshwar.jpg",
   },
   {
-    id:2,
-    name: 'Siddhesh',
-    title: 'Frontend Developer',
-    image:'./assets/images/avatar/siddhesh.jpg',
+    id: 2,
+    name: "Siddhesh",
+    title: "Frontend Developer",
+    image: "./assets/images/avatar/siddhesh.jpg",
   },
   {
-    id:3,
-    name: 'Amol',
-    title: 'Admin',
-    image:'./assets/images/avatar/user.jpeg',
+    id: 3,
+    name: "Amol",
+    title: "Admin",
+    image: "./assets/images/avatar/user.jpeg",
   },
-  
 ];
-
 
 export const upcomingHolidays = [
   {
-    id:1,
-    name: 'Dussehra',
-    date: '24 Oct',
-    
+    id: 1,
+    name: "Dussehra",
+    date: "24 Oct",
   },
   {
-    id:2,
-    name: 'Diwali',
-    date: '12 Nov',
-    
+    id: 2,
+    name: "Diwali",
+    date: "12 Nov",
   },
   {
-    id:3,
-    name: 'Bhai Duj',
-    date: '15 Nov',
-    
+    id: 3,
+    name: "Bhai Duj",
+    date: "15 Nov",
   },
-  
 ];
