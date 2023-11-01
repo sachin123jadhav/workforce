@@ -1,7 +1,7 @@
 export default function CompanyProfilePage() {
   return (
     <>
-      <h1>company profile page</h1>
+      <h6>company profile page</h6>
     </>
   );
 }
