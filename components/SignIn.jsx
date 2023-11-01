@@ -24,27 +24,27 @@ const SignIn = ({ startHours, startMinutes, startSeconds, isStopped }) => {
   const seconds = totalSeconds % 60;
 
   return (
-    <div>
+    <>
       <div className="flex flex-row items-center justify-center mt-10">
-        <div className="w-20 h-20 bg-white rounded-lg flex items-center justify-center m-2 shadow-md">
-          <p className="text-xl font-semibold">{`${hours
+        <div className="w-20 h-20 bg-white rounded-lg flex items-center justify-center m-2 shadow-lg">
+          <p className="text-xl font-semibold text-blue-700">{`${hours
             .toString()
             .padStart(2, "0")}`}</p>
         </div>
         <p className="text-xl font-semibold">:</p>
-        <div className="w-20 h-20 bg-white rounded-lg flex items-center justify-center m-2 shadow-md">
-          <p className="text-xl font-semibold">{`${minutes
+        <div className="w-20 h-20 bg-white rounded-lg flex items-center justify-center m-2 shadow-lg">
+          <p className="text-xl font-semibold text-blue-700">{`${minutes
             .toString()
             .padStart(2, "0")}`}</p>
         </div>
         <p className="text-xl font-semibold">:</p>
-        <div className="w-20 h-20 bg-white rounded-lg flex items-center justify-center m-2 shadow-md">
-          <p className="text-xl font-semibold">{`${seconds
+        <div className="w-20 h-20 bg-white rounded-lg flex items-center justify-center m-2 shadow-lg">
+          <p className="text-xl font-semibold text-blue-700">{`${seconds
             .toString()
             .padStart(2, "0")}`}</p>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

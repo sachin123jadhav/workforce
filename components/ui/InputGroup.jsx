@@ -40,19 +40,9 @@ const InputGroup = ({
 
   return (
     <div
-      className={`  ${horizontal ? "flex" : ""} 
+      className={`floating-label  ${horizontal ? "flex" : ""} 
       ${merged ? "merged" : ""}  `}
     >
-      {label && (
-        <label
-          htmlFor={id}
-          className={`block capitalize ${classLabel}  ${
-            horizontal ? "flex-0 mr-6 md:w-[100px] w-[60px] break-words" : ""
-          }`}
-        >
-          {label}
-        </label>
-      )}
       <div
         className={`flex items-stretch inputGroup 
       
@@ -89,7 +79,7 @@ const InputGroup = ({
                 className={`${
                   error ? " has-error" : " "
                 } input-group-control block w-full focus:outline-none py-2 ${className}  `}
-                placeholder={placeholder}
+                placeholder=""
                 readOnly={readonly}
                 disabled={disabled}
                 id={id}
@@ -100,12 +90,24 @@ const InputGroup = ({
               <input
                 type={type === "password" && open === true ? "text" : type}
                 className={`input-group-control block w-full focus:outline-none py-2 ${className}`}
-                placeholder={placeholder}
+                placeholder=""
                 readOnly={readonly}
                 disabled={disabled}
                 onChange={onChange}
                 id={id}
               />
+            )}
+            {label && (
+              <label
+                htmlFor={id}
+                className={`inline-block w-auto capitalize ${classLabel}  ${
+                  horizontal
+                    ? "flex-0 mr-6 md:w-[100px] w-[60px] break-words"
+                    : ""
+                }`}
+              >
+                {label}
+              </label>
             )}
             {name && isMask && (
               <Cleave

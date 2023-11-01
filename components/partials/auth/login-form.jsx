@@ -9,10 +9,11 @@ import Link from "next/link";
 import { useSelector, useDispatch } from "react-redux";
 import { LoginAction, handleLogin } from "./store";
 import { toast } from "react-toastify";
+
 const schema = yup
   .object({
-    email: yup.string().email("Invalid email").required("Email is Required"),
-    password: yup.string().required("Password is Required"),
+    email: yup.string().email("Invalid email"),
+    password: yup.string(),
   })
   .required();
 const LoginForm = () => {
@@ -52,7 +53,9 @@ const LoginForm = () => {
         type="email"
         register={register}
         error={errors?.email}
+        placeholder="Email ID"
       />
+
       <Textinput
         name="password"
         label="passwrod"
@@ -60,22 +63,20 @@ const LoginForm = () => {
         defaultValue=""
         register={register}
         error={errors.password}
+        placeholder="Password"
       />
+
       <div className="flex justify-between">
         <Checkbox
           value={checked}
           onChange={() => setChecked(!checked)}
           label="Keep me signed in"
         />
-        <Link
-          href="/forgot-password"
-          className="text-sm text-slate-800 dark:text-slate-400 leading-6 font-medium"
-        >
-          Forgot Password?{" "}
-        </Link>
       </div>
 
-      <button className="btn btn-dark block w-full text-center">Sign in</button>
+      <button className="btn btn-dark block w-full text-center bg-green-800">
+        Sign in
+      </button>
     </form>
   );
 };

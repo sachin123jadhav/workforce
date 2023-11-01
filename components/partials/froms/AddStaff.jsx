@@ -8,6 +8,7 @@ import Icon from "@/components/ui/Icon";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import Radio from "@/components/ui/Radio";
 
 const steps = [
   {
@@ -29,19 +30,13 @@ const steps = [
 ];
 
 let stepSchema = yup.object().shape({
-  username: yup.string().required(" User name is required"),
-  fullname: yup.string().required("Full name is required"),
-  email: yup.string().email("Email is not valid").required("Email is required"),
-  phone: yup.string().required("Phone number is required"),
+  //   cmnerror: yup.string().required(" This Field is required"),
+  //   username: yup.string().required(" User name is required"),
+  //   empid: yup.string().required(" Emp ID is required"),
+  //   fullname: yup.string().required("Full name is required"),
+  //   email: yup.string().email("Email is not valid").required("Email is required"),
+  //   phone: yup.string().required("Phone number is required"),
   //.matches(/^[0-9]{12}$/, "Phone number is not valid"),
-  password: yup
-    .string()
-    .required("Password is required")
-    .min(8, "Password must be at least 8 characters"),
-  confirmpass: yup
-    .string()
-    .required("Confirm Password is required")
-    .oneOf([yup.ref("password"), null], "Passwords must match"),
 });
 
 let personalSchema = yup.object().shape({
@@ -60,7 +55,8 @@ let socialSchema = yup.object().shape({
     .required("Facebook url is required")
     .matches(url, "Facebook url is not valid"),
 });
-const FormWizard = () => {
+
+function AddStaff() {
   const [stepNumber, setStepNumber] = useState(0);
 
   // find current step schema
@@ -110,6 +106,20 @@ const FormWizard = () => {
   const handlePrev = () => {
     setStepNumber(stepNumber - 1);
   };
+
+  const [value, setValue] = useState("A");
+  const [value2, setValue2] = useState("M");
+
+  // Event handler for the "Gender" radio buttons
+  const handleChange = (e) => {
+    setValue(e.target.value);
+  };
+
+  // Event handler for the "Marital Status" radio buttons
+  const handleChange2 = (e) => {
+    setValue2(e.target.value);
+  };
+
   return (
     <div>
       <Card title="Vertical">
@@ -121,11 +131,11 @@ const FormWizard = () => {
                   <div
                     className={`   ${
                       stepNumber >= i
-                        ? "bg-slate-900 text-white ring-slate-900 dark:bg-slate-900 dark:ring-slate-700  dark:ring-offset-slate-500 ring-offset-2"
+                        ? "bg-blue-800 text-white ring-slate-900 dark:bg-slate-900 dark:ring-slate-700  dark:ring-offset-slate-500 ring-offset-2"
                         : "bg-white ring-slate-900 ring-opacity-70  text-slate-900 dark:text-slate-300 text-opacity-70 dark:bg-slate-700 dark:ring-slate-700"
                     } 
-            transition duration-150 icon-box md:h-12 md:w-12 h-8 w-8 rounded-full flex flex-col items-center justify-center relative z-[66] ring-1 md:text-lg text-base font-medium
-            `}
+        transition duration-150 icon-box md:h-12 md:w-12 h-8 w-8 rounded-full flex flex-col items-center justify-center relative z-[66] ring-1 md:text-lg text-base font-medium
+        `}
                   >
                     {stepNumber <= i ? (
                       <span> {i + 1}</span>
@@ -139,7 +149,7 @@ const FormWizard = () => {
                   <div
                     className={` ${
                       stepNumber >= i
-                        ? "bg-slate-900 dark:bg-slate-900"
+                        ? "bg-blue-800 dark:bg-slate-900"
                         : "bg-[#E0EAFF] dark:bg-slate-600"
                     } absolute top-0 left-1/2 -translate-x-1/2 h-full w-[2px]`}
                   ></div>
@@ -163,24 +173,32 @@ const FormWizard = () => {
                 <div>
                   <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5">
                     <div className="lg:col-span-3 md:col-span-2 col-span-1">
-                      <h4 className="text-base text-slate-800 dark:text-slate-300 mb-6">
-                        Enter Your Account Details
+                      <h4 className="text-base text-slate-800 dark:text-slate-300 mb-1">
+                        Personal Information
                       </h4>
                     </div>
                     <Textinput
-                      label="Username"
+                      label="Emp ID"
                       type="text"
                       placeholder="Type your User Name"
-                      name="username"
-                      error={errors.username}
+                      name="empID"
+                      required
                       register={register}
                     />
                     <Textinput
-                      label="Full name"
+                      label="First Name"
+                      type="text"
+                      placeholder="Type your User Name"
+                      name="username"
+                      required
+                      register={register}
+                    />
+                    <Textinput
+                      label="Last Name"
                       type="text"
                       placeholder="Full name"
                       name="fullname"
-                      error={errors.fullname}
+                      required
                       register={register}
                     />
                     <Textinput
@@ -188,35 +206,126 @@ const FormWizard = () => {
                       type="email"
                       placeholder="Type your email"
                       name="email"
-                      error={errors.email}
+                      required
                       register={register}
                     />
                     <InputGroup
                       label="Phone Number"
                       type="text"
-                      prepend="MY (+6)"
+                      prepend="IN (+91)"
                       placeholder="Phone Number"
                       name="phone"
-                      error={errors.phone}
+                      required
+                      register={register}
+                    />
+                    <div className="radio-btns">
+                      <div className="mb-2">Gender</div>
+                      <div className="flex flex-wrap space-xy-5">
+                        <Radio
+                          label="Male"
+                          name="x"
+                          value="A"
+                          checked={value === "A"}
+                          onChange={handleChange}
+                        />
+                        <Radio
+                          label="Female"
+                          name="x"
+                          value="B"
+                          checked={value === "B"}
+                          onChange={handleChange}
+                        />
+                        <Radio
+                          label="Other"
+                          name="x"
+                          value="C"
+                          checked={value === "C"}
+                          onChange={handleChange}
+                        />
+                      </div>
+                    </div>
+                    <div className="radio-btns">
+                      <div className="mb-2">Marital Status</div>
+                      <div className="flex flex-wrap space-xy-5">
+                        <Radio
+                          label="Married"
+                          name="m"
+                          value="M"
+                          checked={value2 === "M"}
+                          onChange={handleChange2}
+                        />
+                        <Radio
+                          label="Unmarried"
+                          name="m"
+                          value="U"
+                          checked={value2 === "U"}
+                          onChange={handleChange2}
+                        />
+                      </div>
+                    </div>
+                    <Textinput
+                      label="wife/husband name"
+                      type="text"
+                      placeholder=" "
+                      name="wife/husbandname"
+                      required
                       register={register}
                     />
                     <Textinput
-                      label="Password"
-                      type="password"
-                      placeholder="8+ characters, 1 capitat letter "
-                      name="password"
-                      error={errors.password}
-                      hasicon
+                      label="mother name"
+                      type="text"
+                      placeholder=" "
+                      name="mother_name"
+                      required
                       register={register}
                     />
                     <Textinput
-                      label="Confirm Password"
-                      type="password"
-                      placeholder="Password"
-                      name="confirmpass"
-                      error={errors.confirmpass}
+                      label="blood group"
+                      type="text"
+                      placeholder=" "
+                      name="blood_group"
+                      required
                       register={register}
-                      hasicon
+                    />
+                    <Textinput
+                      label="identification mark"
+                      type="text"
+                      placeholder=" "
+                      name="identification_mark"
+                      required
+                      register={register}
+                    />
+                    <Textinput
+                      label="aadhar card "
+                      type="text"
+                      placeholder=" "
+                      name="aadhar_card"
+                      required
+                      register={register}
+                    />
+                    <Textinput
+                      label="pan card"
+                      type="text"
+                      placeholder=" "
+                      name="pan_card"
+                      required
+                      register={register}
+                    />
+                    <Textinput
+                      label="bank account no"
+                      type="text"
+                      placeholder=" "
+                      name="bank_account_no"
+                      required
+                      register={register}
+                    />
+                    <Textinput
+                      label="Ifsc code"
+                      type="text"
+                      placeholder=" "
+                      name="Ifsc_code"
+                      required
+                      register={register}
                     />
                   </div>
                 </div>
@@ -296,13 +405,13 @@ const FormWizard = () => {
                 {stepNumber !== 0 && (
                   <Button
                     text="prev"
-                    className="btn-dark"
+                    className="btn-dark bg-blue-700"
                     onClick={handlePrev}
                   />
                 )}
                 <Button
                   text={stepNumber !== steps.length - 1 ? "next" : "submit"}
-                  className="btn-dark"
+                  className="btn-dark bg-blue-700"
                   type="submit"
                 />
               </div>
@@ -312,6 +421,6 @@ const FormWizard = () => {
       </Card>
     </div>
   );
-};
+}
 
-export default FormWizard;
+export default AddStaff;

@@ -37,20 +37,10 @@ const Textinput = ({
 
   return (
     <div
-      className={`fromGroup  ${error ? "has-error" : ""}  ${
+      className={`fromGroup floating-label ${error ? "has-error" : ""}  ${
         horizontal ? "flex" : ""
       }  ${validate ? "is-valid" : ""} `}
     >
-      {label && (
-        <label
-          htmlFor={id}
-          className={`block capitalize ${classLabel}  ${
-            horizontal ? "flex-0 mr-6 md:w-[100px] w-[60px] break-words" : ""
-          }`}
-        >
-          {label}
-        </label>
-      )}
       <div className={`relative ${horizontal ? "flex-1" : ""}`}>
         {name && !isMask && (
           <input
@@ -60,7 +50,7 @@ const Textinput = ({
             className={`${
               error ? " has-error" : " "
             } form-control py-2 ${className}  `}
-            placeholder={placeholder}
+            placeholder=""
             readOnly={readonly}
             defaultValue={defaultValue}
             disabled={disabled}
@@ -72,7 +62,7 @@ const Textinput = ({
           <input
             type={type === "password" && open === true ? "text" : type}
             className={`form-control py-2 ${className}`}
-            placeholder={placeholder}
+            placeholder=""
             readOnly={readonly}
             disabled={disabled}
             defaultValue={defaultValue}
@@ -111,6 +101,16 @@ const Textinput = ({
           />
         )}
         {/* icon */}
+        {label && (
+          <label
+            htmlFor={id}
+            className={`inline-block w-auto capitalize ${classLabel}  ${
+              horizontal ? "flex-0 mr-6 md:w-[100px] w-[60px] break-words" : ""
+            }`}
+          >
+            {label}
+          </label>
+        )}
         <div className="flex text-xl absolute ltr:right-[14px] rtl:left-[14px] top-1/2 -translate-y-1/2  space-x-1 rtl:space-x-reverse">
           {hasicon && (
             <span
@@ -138,6 +138,7 @@ const Textinput = ({
           )}
         </div>
       </div>
+
       {/* error and success message*/}
       {error && (
         <div

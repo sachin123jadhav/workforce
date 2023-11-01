@@ -102,6 +102,9 @@ const Modal = ({
                       {footerContent && (
                         <div className="px-4 py-3 flex justify-end space-x-3 border-t border-slate-100 dark:border-slate-700">
                           {footerContent}
+                          <button onClick={closeModal} className="text-[22px]">
+                            Cancel
+                          </button>
                         </div>
                       )}
                     </Dialog.Panel>

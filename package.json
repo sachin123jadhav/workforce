@@ -18,6 +18,7 @@
     "@headlessui/react": "^1.7.13",
     "@hookform/resolvers": "^2.9.11",
     "@iconify/react": "^4.1.0",
+    "@nextui-org/react": "^2.1.13",
     "@reduxjs/toolkit": "^1.9.3",
     "@south-paw/react-vector-maps": "^3.2.0",
     "@svg-maps/world": "^1.0.1",

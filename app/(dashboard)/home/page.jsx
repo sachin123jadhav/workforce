@@ -1,14 +1,8 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import dynamic from "next/dynamic";
+
 import Card from "@/components/ui/Card";
-import Textinput from "@/components/ui/Textinput";
-import GroupChart5 from "@/components/partials/widget/chart/group-chart5";
-import Link from "next/link";
-import SimpleBar from "simplebar-react";
-import HistoryChart from "@/components/partials/widget/chart/history-chart";
-import AccountReceivable from "@/components/partials/widget/chart/account-receivable";
-import AccountPayable from "@/components/partials/widget/chart/account-payable";
+
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 

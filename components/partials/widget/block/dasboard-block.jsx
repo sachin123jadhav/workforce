@@ -28,12 +28,16 @@ function DasboardBlock() {
                   <p className="text-lg"> {item.title}</p>
                 </div>
                 <div className="text-white dark:text-white text-lg font-medium">
-                  <h3 className="text-white">{ item.count}</h3>
+                  <h3 className="text-white">{item.count}</h3>
                 </div>
               </div>
               <div className="absolute top-0 right-0 h-full">
-            <img src="/assets/images/all-img/bg.svg" width={'100%'} className="h-full" /> 
-            </div>
+                <img
+                  src="/assets/images/all-img/bg.svg"
+                  width={"100%"}
+                  className="h-full"
+                />
+              </div>
             </div>
           </Card>
         ))}
