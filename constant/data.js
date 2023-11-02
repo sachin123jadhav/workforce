@@ -157,6 +157,14 @@ export const menuItems = [
         childtitle: "Designation",
         childlink: "designation",
       },
+      {
+        childtitle: "Department",
+        childlink: "department",
+      },
+      {
+        childtitle: "Employment",
+        childlink: "employment",
+      },
     ],
   },
 ];

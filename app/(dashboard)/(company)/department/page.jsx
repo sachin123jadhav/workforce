@@ -1,54 +1,49 @@
 "use client";
-import { getDesignationData, updateDesignationData } from "@/store/designation";
-import { useEffect, useState } from "react";
+
+import Modal from "@/components/ui/Modal";
+import { getdepartmentData, updatedepartmentData } from "@/store/department";
+import Button from "@/components/ui/Button";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import React from "react";
-import Modal from "@/components/ui/Modal";
-import Button from "@/components/ui/Button";
 
-export default function DesignationPage() {
+export default function Department() {
   let no = 0;
   const [data, setData] = useState([]);
   const dispatch = useDispatch();
 
   const token = useSelector((state) => state.auth.isAuth.token);
-  const designationData = useSelector(
-    (state) => state.designation.designationData
-  );
-  const designationText = useSelector((state) => state.designation.text);
+  const departData = useSelector((state) => state.department.departmentData);
+  const departUpdateData = useSelector((state) => state.department.updateText);
 
   useEffect(() => {
-    console.log("In useEffect of designation update");
-    if (designationText) dispatch(getDesignationData(token));
-  }, [designationText]);
-
-  useEffect(() => {
-    console.log("In useEffect of designation data");
-    if (designationData) setData(designationData);
-  }, [designationData]);
-
-  useEffect(() => {
-    console.log("In useEffect of empty");
-    dispatch(getDesignationData(token));
+    console.log("empty dependency");
+    dispatch(getdepartmentData(token));
   }, []);
 
-  const headerList = ["Sr No", "Designation", "Action"];
+  useEffect(() => {
+    if (departData) setData(departData);
+    console.log("one added dependency");
+  }, [departData]);
+
+  useEffect(() => {
+    if (departUpdateData) dispatch(getdepartmentData(token));
+    console.log("In update dependency");
+  }, [departUpdateData]);
 
   function handleChange(id) {
     let val = document.getElementById("username").value;
-    console.log("username  change ->", val);
-    console.log("designation id ->", id);
-
-    dispatch(updateDesignationData(token, id, val));
+    // console.log("username  change ->", val);
+    // console.log("designation id ->", id);
+    dispatch(updatedepartmentData(token, id, val));
   }
 
-  console.log("Above return function");
+  const headerList = ["Sr No", "Department", "Action"];
 
   return (
     <>
       <div className="m-4">
-        <h5>Designation page</h5>
+        <h5>Department page</h5>
       </div>
       <section>
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -67,30 +62,27 @@ export default function DesignationPage() {
             <tbody>
               {data?.map((uData, i) => {
                 no = no + 1;
-                // console.log(i);
-                // console.log(uData);
+
                 return (
                   <tr
                     key={i}
                     className="bg-white border-b dark:bg-gray-900 dark:border-gray-700"
                   >
                     <td className="px-6 py-4">{no}</td>
-                    <td className="px-6 py-4">{uData.designation}</td>
+                    <td className="px-6 py-4">{uData.department}</td>
                     <td className="px-6 py-4">
                       <Modal
-                        title="Update Designation"
+                        title="Update Department"
                         label="Update"
                         icon="heroicons-outline:plus-sm"
                         iconClass="text-lg"
                         labelClass="btn-primary  rounded-[999px]"
                         uncontrol
                         centered
-                        // closeModal={closeModal()}
                         footerContent={
                           <Button
                             text="Update"
                             className="btn-dark "
-                            // onClick={inputValue}
                             onClick={() => handleChange(uData.id)}
                           />
                         }
@@ -101,11 +93,10 @@ export default function DesignationPage() {
                               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                               id="username"
                               type="text"
-                              defaultValue={uData.designation}
+                              defaultValue={uData.department}
                             />
                           </div>
                         </form>
-                        {/* <div className="text-base text-slate-600 dark:text-slate-300"></div> */}
                       </Modal>
                     </td>
                   </tr>

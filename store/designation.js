@@ -33,10 +33,9 @@ export const getDesignationData = (token) => async (dispatch) => {
       url: API_HOST + `/users/api/v1/designation/`,
       headers: localHeader,
     });
-    console.log("In designationList ", res.data);
+    console.log("In get designationList ", res.data);
     dispatch(postSuccess(res.data));
   } catch (error) {
-    // dispatch(postFailure(error));
     console.log("In designationList error", error);
   }
 };
@@ -58,9 +57,8 @@ export const updateDesignationData =
         data: bodyData,
       });
       console.log("In update designationList ", res);
-      dispatch(postUpdate(res.statusText));
+      dispatch(postUpdate(res.data));
     } catch (error) {
-      // dispatch(postFailure(error));
       console.log("In designationList error", error);
     }
   };
