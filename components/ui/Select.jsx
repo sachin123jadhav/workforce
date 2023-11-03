@@ -28,20 +28,10 @@ const Select = ({
   options = options || Array(3).fill("option");
   return (
     <div
-      className={`fromGroup  ${error ? "has-error" : ""}  ${
+      className={`fromGroup floating-label ${error ? "has-error" : ""}  ${
         horizontal ? "flex" : ""
       }  ${validate ? "is-valid" : ""} `}
     >
-      {label && (
-        <label
-          htmlFor={id}
-          className={`block capitalize ${classLabel}  ${
-            horizontal ? "flex-0 mr-6 md:w-[100px] w-[60px] break-words" : ""
-          }`}
-        >
-          {label}
-        </label>
-      )}
       <div className={`relative ${horizontal ? "flex-1" : ""}`}>
         {name && (
           <select
@@ -108,6 +98,16 @@ const Select = ({
               </Fragment>
             ))}
           </select>
+        )}
+        {label && (
+          <label
+            htmlFor={id}
+            className={`inline-block w-auto capitalize ${classLabel}  ${
+              horizontal ? "flex-0 mr-6 md:w-[100px] w-[60px] break-words" : ""
+            }`}
+          >
+            {label}
+          </label>
         )}
 
         {/* icon */}

@@ -9,23 +9,36 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import Radio from "@/components/ui/Radio";
+import Flatpickr from "react-flatpickr";
+
+import Select from "@/components/ui/Select";
+import Fileinput from "@/components/ui/Fileinput";
 
 const steps = [
   {
     id: 1,
-    title: "Personal Information",
+    title: "User Registration",
   },
   {
     id: 2,
-    title: "Work Information",
+    title: "Personal Information",
   },
   {
     id: 3,
-    title: "Address",
+    title: "Education Information",
   },
   {
     id: 4,
-    title: "Social Links",
+    title: "Experience Information",
+  },
+
+  {
+    id: 5,
+    title: "Certification Information",
+  },
+  {
+    id: 5,
+    title: "settings",
   },
 ];
 
@@ -40,23 +53,27 @@ let stepSchema = yup.object().shape({
 });
 
 let personalSchema = yup.object().shape({
-  fname: yup.string().required(" First name is required"),
-  lname: yup.string().required(" Last name is required"),
+  // fname: yup.string().required(" First name is required"),
+  // lname: yup.string().required(" Last name is required"),
 });
-let addressSchema = yup.object().shape({
-  address: yup.string().required(" Address is required"),
+let educationSchema = yup.object().shape({
+  // address: yup.string().required(" Address is required"),
 });
 const url =
   /^((ftp|http|https):\/\/)?(www.)?(?!.*(ftp|http|https|www.))[a-zA-Z0-9_-]+(\.[a-zA-Z]+)+((\/)[\w#]+)*(\/\w+\?[a-zA-Z0-9_]+=\w+(&[a-zA-Z0-9_]+=\w+)*)?$/gm;
 
-let socialSchema = yup.object().shape({
-  fburl: yup
-    .string()
-    .required("Facebook url is required")
-    .matches(url, "Facebook url is not valid"),
+let experienceSchema = yup.object().shape({
+  // fburl: yup
+  //   .string()
+  //   .required("Facebook url is required")
+  //   .matches(url, "Facebook url is not valid"),
 });
+let certificationSchema = yup.object().shape({});
+
+let settingSchema = yup.object().shape({});
 
 function AddStaff() {
+  const [picker, setPicker] = useState(new Date());
   const [stepNumber, setStepNumber] = useState(0);
 
   // find current step schema
@@ -69,10 +86,16 @@ function AddStaff() {
       currentStepSchema = personalSchema;
       break;
     case 2:
-      currentStepSchema = addressSchema;
+      currentStepSchema = educationSchema;
       break;
     case 3:
-      currentStepSchema = socialSchema;
+      currentStepSchema = experienceSchema;
+      break;
+    case 4:
+      currentStepSchema = certificationSchema;
+      break;
+    case 5:
+      currentStepSchema = settingSchema;
       break;
     default:
       currentStepSchema = stepSchema;
@@ -120,9 +143,41 @@ function AddStaff() {
     setValue2(e.target.value);
   };
 
+  const [selectedFile2, setSelectedFile2] = useState(null);
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedFileforPan, setSelectedFileforPan] = useState(null);
+  const [selectedFileforPassbook, setSelectedFileforPassbook] = useState(null);
+  const [selectedFileforMarksheet, setSelectedFileforMarksheet] =
+    useState(null);
+  const [selectedFiles2, setSelectedFiles2] = useState([]);
+
+  const handleFileChange2 = (e) => {
+    setSelectedFile2(e.target.files[0]);
+  };
+  const handleFileChange = (e) => {
+    setSelectedFile(e.target.files[0]);
+  };
+
+  const handleFileChangeForPan = (e) => {
+    setSelectedFileforPan(e.target.files[0]);
+  };
+  const handleFileChangeForPassbook = (e) => {
+    setSelectedFileforPassbook(e.target.files[0]);
+  };
+
+  const handleFileChangeForMarksheet = (e) => {
+    setSelectedFileforMarksheet(e.target.files[0]);
+  };
+
+  const handleFileChangeMultiple2 = (e) => {
+    const files = e.target.files;
+    const filesArray = Array.from(files).map((file) => file);
+    setSelectedFiles2(filesArray);
+  };
+
   return (
     <div>
-      <Card title="Vertical">
+      <Card>
         <div className="grid gap-5 grid-cols-12">
           <div className="lg:col-span-3 col-span-12">
             <div className="flex z-[5] items-start relative flex-col lg:min-h-full md:min-h-[300px] min-h-[250px]">
@@ -172,27 +227,23 @@ function AddStaff() {
               {stepNumber === 0 && (
                 <div>
                   <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5">
-                    <div className="lg:col-span-3 md:col-span-2 col-span-1">
-                      <h4 className="text-base text-slate-800 dark:text-slate-300 mb-1">
-                        Personal Information
-                      </h4>
-                    </div>
-                    <Textinput
-                      label="Emp ID"
-                      type="text"
-                      placeholder="Type your User Name"
-                      name="empID"
-                      required
-                      register={register}
-                    />
                     <Textinput
                       label="First Name"
                       type="text"
-                      placeholder="Type your User Name"
-                      name="username"
+                      placeholder=""
+                      name="firstname"
                       required
                       register={register}
                     />
+                    <Textinput
+                      label="Middle name"
+                      type="text"
+                      placeholder=""
+                      name="middlename"
+                      required
+                      register={register}
+                    />
+
                     <Textinput
                       label="Last Name"
                       type="text"
@@ -211,13 +262,134 @@ function AddStaff() {
                     />
                     <InputGroup
                       label="Phone Number"
-                      type="text"
+                      type="tel"
                       prepend="IN (+91)"
                       placeholder="Phone Number"
                       name="phone"
                       required
                       register={register}
                     />
+                    <InputGroup
+                      label="Ulternate contact Number"
+                      type="tel"
+                      prepend="IN (+91)"
+                      placeholder="Phone Number"
+                      name="phone"
+                      register={register}
+                    />
+                    <div className="floating-label date-input">
+                      <Flatpickr
+                        value={picker}
+                        id="hf-picker"
+                        className="form-control py-2"
+                        onChange={(date) => setPicker(date)}
+                        options={{
+                          altInput: true,
+                          altFormat: "F j, Y",
+                          dateFormat: "Y-m-d",
+                        }}
+                      />
+                      <label>Date of Birth</label>
+                    </div>
+
+                    <Textinput
+                      label="Employee ID"
+                      type="number"
+                      placeholder=""
+                      name="user_id"
+                      required
+                      register={register}
+                    />
+
+                    <Select
+                      options={[
+                        "Company Admin",
+                        "Board of Director",
+                        "HR",
+                        "Employee",
+                      ]}
+                      label="Designation"
+                    />
+
+                    <Select
+                      options={[
+                        "Department 1",
+                        "Department 2",
+                        "Department 3",
+                        "Department 4",
+                      ]}
+                      label="Department"
+                    />
+                    <Select
+                      options={["Employment type 1", "Employment type 2"]}
+                      label="Employment"
+                    />
+                    <Select
+                      options={[
+                        "User Role 1",
+                        "User Role 2",
+                        "User Role 3",
+                        "User Role 4",
+                      ]}
+                      label="User Role"
+                    />
+
+                    <Textinput
+                      label="Address"
+                      type="text"
+                      placeholder="Full name"
+                      name="address"
+                      required
+                      register={register}
+                    />
+                    <Textinput
+                      label="Permenant Address"
+                      type="text"
+                      placeholder="Full name"
+                      name="permaddress"
+                      required
+                      register={register}
+                    />
+
+                    <Textinput
+                      label="Password"
+                      type="password"
+                      placeholder=""
+                      name="password"
+                      required
+                      register={register}
+                    />
+
+                    <Select
+                      options={["Branch 1", "Branch 2", "Branch 3", "Branch 4"]}
+                      label="Branch"
+                    />
+                    <div className="file-input">
+                      <p className="file-label">Profile Image</p>
+                      <Fileinput
+                        name="basic"
+                        selectedFile={selectedFile2}
+                        onChange={handleFileChange2}
+                        preview
+                      />
+                    </div>
+                    <div className="file-input">
+                      <p className="file-label">Face match images</p>
+                      <Fileinput
+                        name="basic"
+                        selectedFiles={selectedFiles2}
+                        onChange={handleFileChangeMultiple2}
+                        multiple
+                        preview
+                      />
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {stepNumber === 1 && (
+                <div>
+                  <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5">
                     <div className="radio-btns">
                       <div className="mb-2">Gender</div>
                       <div className="flex flex-wrap space-xy-5">
@@ -264,10 +436,18 @@ function AddStaff() {
                       </div>
                     </div>
                     <Textinput
-                      label="wife/husband name"
+                      label="Spouse name"
                       type="text"
                       placeholder=" "
-                      name="wife/husbandname"
+                      name="spousename"
+                      required
+                      register={register}
+                    />
+                    <Textinput
+                      label="father name"
+                      type="text"
+                      placeholder=" "
+                      name="mother_name"
                       required
                       register={register}
                     />
@@ -279,14 +459,65 @@ function AddStaff() {
                       required
                       register={register}
                     />
+                    <div className="floating-label date-input">
+                      <Flatpickr
+                        value={picker}
+                        id="hf-picker"
+                        className="form-control py-2"
+                        onChange={(date) => setPicker(date)}
+                        options={{
+                          altInput: true,
+                          altFormat: "F j, Y",
+                          dateFormat: "Y-m-d",
+                        }}
+                      />
+                      <label>Joining Date</label>
+                    </div>
+                    <div className="floating-label date-input">
+                      <Flatpickr
+                        value={picker}
+                        id="hf-picker"
+                        className="form-control py-2"
+                        onChange={(date) => setPicker(date)}
+                        options={{
+                          altInput: true,
+                          altFormat: "F j, Y",
+                          dateFormat: "Y-m-d",
+                        }}
+                      />
+                      <label>Last Date</label>
+                    </div>
                     <Textinput
-                      label="blood group"
+                      label="Emergency contact relation"
                       type="text"
                       placeholder=" "
-                      name="blood_group"
+                      name="emergency_contact_relation"
                       required
                       register={register}
                     />
+                    <Textinput
+                      label="emergency person contact"
+                      type="text"
+                      placeholder=" "
+                      name="emergency_person_number"
+                      required
+                      register={register}
+                    />
+
+                    <Select
+                      options={[
+                        "A+",
+                        "A-",
+                        "B+",
+                        "B-",
+                        "AB+",
+                        "AB-",
+                        "O+",
+                        "O-",
+                      ]}
+                      label="Blood Group"
+                    />
+
                     <Textinput
                       label="identification mark"
                       type="text"
@@ -303,12 +534,35 @@ function AddStaff() {
                       required
                       register={register}
                     />
+                    <div className="file-input">
+                      <p className="file-label">Upload AAdhar Card</p>
+                      <Fileinput
+                        name="basic"
+                        selectedFile={selectedFile}
+                        onChange={handleFileChange}
+                      />
+                    </div>
                     <Textinput
                       label="pan card"
                       type="text"
                       placeholder=" "
                       name="pan_card"
                       required
+                      register={register}
+                    />
+                    <div className="file-input">
+                      <p className="file-label">Upload Pan Card</p>
+                      <Fileinput
+                        name="pncard"
+                        selectedFile={selectedFileforPan}
+                        onChange={handleFileChangeForPan}
+                      />
+                    </div>
+                    <Textinput
+                      label="bank name"
+                      type="text"
+                      placeholder=""
+                      name="bank_name"
                       register={register}
                     />
                     <Textinput
@@ -327,57 +581,109 @@ function AddStaff() {
                       required
                       register={register}
                     />
-                  </div>
-                </div>
-              )}
+                    <Textinput
+                      label="bank branch name"
+                      type="text"
+                      placeholder=""
+                      name="bank_branch_name"
+                      register={register}
+                    />
 
-              {stepNumber === 1 && (
-                <div>
-                  <div className="grid md:grid-cols-2 grid-cols-1 gap-5">
-                    <div className="md:col-span-2 col-span-1">
-                      <h4 className="text-base text-slate-800 dark:text-slate-300 mb-6">
-                        Enter Your Personal info-500
-                      </h4>
+                    <Textinput
+                      label="salary"
+                      type="number"
+                      placeholder=""
+                      name="salary"
+                      register={register}
+                    />
+                    <div className="file-input">
+                      <p className="file-label">Upload Passbook</p>
+                      <Fileinput
+                        name="passbook"
+                        selectedFile={selectedFileforPassbook}
+                        onChange={handleFileChangeForPassbook}
+                      />
                     </div>
-                    <Textinput
-                      label="First name"
-                      type="text"
-                      placeholder="First name"
-                      name="fname"
-                      error={errors.fname}
-                      register={register}
-                    />
-                    <Textinput
-                      label="Last name"
-                      type="text"
-                      placeholder="Last name"
-                      name="lname"
-                      error={errors.lname}
-                      register={register}
-                    />
                   </div>
                 </div>
               )}
               {stepNumber === 2 && (
                 <div>
-                  <div className="grid grid-cols-1 gap-5">
-                    <div className="">
-                      <h4 className="text-base text-slate-800 dark:text-slate-300 mb-6">
-                        Enter Your Address
-                      </h4>
-                    </div>
-                    <Textarea
-                      label="Address"
+                  <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5">
+                    <Textinput
+                      label="Degree Name"
                       type="text"
-                      placeholder="Write Address"
-                      name="address"
-                      error={errors.address}
+                      placeholder=""
+                      name="education_name"
+                      register={register}
+                    />
+                    <div className="file-input">
+                      <p className="file-label">Upload Marksheet</p>
+                      <Fileinput
+                        name="passbook"
+                        selectedFile={selectedFileforMarksheet}
+                        onChange={handleFileChangeForMarksheet}
+                      />
+                    </div>
+
+                    <Textinput
+                      label="collge name"
+                      type="text"
+                      placeholder=""
+                      name="collge_name"
+                      register={register}
+                    />
+
+                    <Textinput
+                      label="passout year"
+                      type="text"
+                      placeholder=""
+                      name="passout_year"
                       register={register}
                     />
                   </div>
                 </div>
               )}
               {stepNumber === 3 && (
+                <div>
+                  <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5">
+                    <div className="lg:col-span-3 md:col-span-2 col-span-1">
+                      <h4 className="text-base text-slate-800 dark:text-slate-300 mb-6">
+                        Enter Your Address
+                      </h4>
+                    </div>
+                    <Textinput
+                      label="Facebook"
+                      type="text"
+                      placeholder="https://www.facebook.com/profile"
+                      name="fburl"
+                      error={errors.fburl}
+                      register={register}
+                    />
+                  </div>
+                </div>
+              )}
+              {stepNumber === 4 && (
+                <div>
+                  <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5">
+                    <div className="lg:col-span-3 md:col-span-2 col-span-1">
+                      <h4 className="text-base text-slate-800 dark:text-slate-300 mb-6">
+                        Enter Your Address
+                      </h4>
+                    </div>
+                    <Textinput
+                      label="Facebook"
+                      type="text"
+                      placeholder="https://www.facebook.com/profile"
+                      name="fburl"
+                      error={errors.fburl}
+                      register={register}
+                    />
+                  </div>
+                </div>
+              )}
+
+              {stepNumber === 5 && (
                 <div>
                   <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5">
                     <div className="lg:col-span-3 md:col-span-2 col-span-1">
@@ -404,6 +710,7 @@ function AddStaff() {
               >
                 {stepNumber !== 0 && (
                   <Button
+                    icon="ant-design:double-left-outlined"
                     text="prev"
                     className="btn-dark bg-blue-700"
                     onClick={handlePrev}
@@ -413,6 +720,8 @@ function AddStaff() {
                   text={stepNumber !== steps.length - 1 ? "next" : "submit"}
                   className="btn-dark bg-blue-700"
                   type="submit"
+                  icon="ant-design:double-right-outlined"
+                  iconPosition="right"
                 />
               </div>
             </form>
