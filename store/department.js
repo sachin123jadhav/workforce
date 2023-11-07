@@ -5,6 +5,7 @@ import axios from "axios";
 const initialState = {
   departmentData: null,
   updateText: null,
+  newData: null,
 };
 
 export const department = createSlice({
@@ -16,6 +17,9 @@ export const department = createSlice({
     },
     postUpdate: (state, action) => {
       state.updateText = action.payload;
+    },
+    postAdd: (state, action) => {
+      state.newData = action.payload;
     },
   },
 });
@@ -62,5 +66,28 @@ export const updatedepartmentData =
     }
   };
 
-export const { postSuccess, postUpdate } = department.actions;
+export const addDepartmentData =
+  (token, departmentData) => async (dispatch) => {
+    const localHeader = {
+      Authorization: `Token ${token}`,
+    };
+    const bodyData = {
+      department: departmentData,
+    };
+    try {
+      console.log("in add function of department");
+      const res = await axios({
+        method: "POST",
+        url: API_HOST + `/users/api/v1/department/`,
+        headers: localHeader,
+        data: bodyData,
+      });
+      console.log("In add departmentList ", res);
+      dispatch(postAdd(res.data));
+    } catch (error) {
+      console.log("In departmentList error", error);
+    }
+  };
+
+export const { postSuccess, postUpdate, postAdd } = department.actions;
 export default department.reducer;

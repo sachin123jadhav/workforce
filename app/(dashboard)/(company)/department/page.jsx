@@ -1,7 +1,11 @@
 "use client";
 
 import Modal from "@/components/ui/Modal";
-import { getdepartmentData, updatedepartmentData } from "@/store/department";
+import {
+  addDepartmentData,
+  getdepartmentData,
+  updatedepartmentData,
+} from "@/store/department";
 import Button from "@/components/ui/Button";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -10,11 +14,14 @@ import { useDispatch } from "react-redux";
 export default function Department() {
   let no = 0;
   const [data, setData] = useState([]);
+  const [addData, setAddData] = useState();
+
   const dispatch = useDispatch();
 
   const token = useSelector((state) => state.auth.isAuth.token);
   const departData = useSelector((state) => state.department.departmentData);
   const departUpdateData = useSelector((state) => state.department.updateText);
+  const departNewData = useSelector((state) => state.department.newData);
 
   useEffect(() => {
     console.log("empty dependency");
@@ -27,9 +34,9 @@ export default function Department() {
   }, [departData]);
 
   useEffect(() => {
-    if (departUpdateData) dispatch(getdepartmentData(token));
-    console.log("In update dependency");
-  }, [departUpdateData]);
+    if (departUpdateData || departNewData) dispatch(getdepartmentData(token));
+    console.log("In update and add dependency");
+  }, [departUpdateData, departNewData]);
 
   function handleChange(id) {
     let val = document.getElementById("username").value;
@@ -38,12 +45,53 @@ export default function Department() {
     dispatch(updatedepartmentData(token, id, val));
   }
 
+  function addDepartment() {
+    console.log("addDapartment", addData);
+    dispatch(addDepartmentData(token, addData));
+    setAddData();
+  }
+
   const headerList = ["Sr No", "Department", "Action"];
 
   return (
     <>
-      <div className="m-4">
-        <h5>Department page</h5>
+      <div className="m-4 flex justify-between">
+        <div>
+          {" "}
+          <h5>Department page</h5>
+        </div>
+        <div>
+          <Modal
+            title="Add Department"
+            label="Add"
+            icon="heroicons-outline:plus-sm"
+            iconClass="text-lg"
+            labelClass="btn-primary  rounded-[999px]"
+            uncontrol
+            centered
+            footerContent={
+              <Button
+                text="Save"
+                className="btn-dark "
+                onClick={() => addDepartment()}
+              />
+            }
+          >
+            <form>
+              <div class="mb-4">
+                <input
+                  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  id="saveDesignation"
+                  type="text"
+                  value={addData}
+                  onChange={(e) => {
+                    setAddData(e.target.value);
+                  }}
+                />
+              </div>
+            </form>
+          </Modal>{" "}
+        </div>{" "}
       </div>
       <section>
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">

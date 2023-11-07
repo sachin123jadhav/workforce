@@ -10,11 +10,14 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { AiOutlineCheckCircle, AiOutlineCloseCircle } from "react-icons/ai";
+// import { useRouter } from "next/router";
+import Link from "next/link";
 
 export default function CompanyProfilePage() {
   let no = 0;
   const [data, setData] = useState([]);
   const dispatch = useDispatch();
+  // const router = useRouter();
 
   const token = useSelector((state) => state.auth.isAuth.token);
   const comProfileData = useSelector(
@@ -46,26 +49,91 @@ export default function CompanyProfilePage() {
     dispatch(updatecompanyprofileData(token, id, val));
   }
 
+  function handleClick() {
+    router.push("/addbranch");
+  }
+
+  // const headerList = [
+  //   "Sr No",
+  //   "Branch Name",
+  //   "Address",
+  //   "Branch Manager",
+  //   "Country Code",
+  //   "Branch Number",
+  //   "Latitude",
+  //   "Longitude",
+  //   "Radius",
+  //   "Location",
+  //   "Active",
+  //   "Action",
+  // ];
+
   const headerList = [
     "Sr No",
     "Branch Name",
     "Address",
     "Branch Manager",
-    "Country Code",
     "Branch Number",
-    "Latitude",
-    "Longitude",
-    "Radius",
-    "Location",
     "Active",
     "Action",
   ];
 
   return (
     <>
-      <div className="m-4">
-        <h5>Company Profile page</h5>
-      </div>
+      {" "}
+      <section>
+        {" "}
+        <div className="m-4 flex justify-between">
+          <div>
+            {" "}
+            <h5>Company Profile page</h5>{" "}
+          </div>
+          <div>
+            {/* <button
+              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+              onClick={handleClick}
+            >
+              Add
+            </button> */}
+            <Link
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+              href="/addbranch"
+            >
+              Add
+            </Link>
+            {/* <Modal
+              title="Add Employment"
+              label="Add"
+              icon="heroicons-outline:plus-sm"
+              iconClass="text-lg"
+              labelClass="btn-primary  rounded-[999px]"
+              uncontrol
+              centered
+              footerContent={
+                <Button
+                  text="Save"
+                  className="btn-dark "
+                  // onClick={() => addEmployment()}
+                />
+              }
+            >
+              <form>
+                <div class="mb-4">
+                  <input
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="saveDesignation"
+                    type="text"
+                    // value={addData}
+                    onChange={(e) => {
+                      // setAddData(e.target.value);
+                    }}
+                  />
+                </div>
+              </form>
+            </Modal>{" "} */}
+          </div>{" "}
+        </div>
+      </section>
       <section>
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
           <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -81,7 +149,6 @@ export default function CompanyProfilePage() {
               </tr>
             </thead>
             <tbody>
-              {/* {console.log(data)} */}
               {data?.map((uData, i) => {
                 no = no + 1;
                 return (
@@ -93,12 +160,14 @@ export default function CompanyProfilePage() {
                     <td className="px-6 py-4">{uData.branch_name}</td>
                     <td className="px-6 py-4">{uData.branch_address}</td>
                     <td className="px-6 py-4">{uData.branch_manager}</td>
-                    <td className="px-6 py-4">{uData.country_code}</td>
-                    <td className="px-6 py-4">{uData.branch_number}</td>
+                    <td className="px-6 py-4">
+                      {uData.country_code + " " + uData.branch_number}
+                    </td>
+                    {/* <td className="px-6 py-4">{uData.branch_number}</td>
                     <td className="px-6 py-4">{uData.latitude}</td>
                     <td className="px-6 py-4">{uData.longitude}</td>
                     <td className="px-6 py-4">{uData.radius}</td>
-                    <td className="px-6 py-4">{uData.location}</td>
+                    <td className="px-6 py-4">{uData.location}</td> */}
                     <td className="px-6 py-4">
                       {uData.active ? (
                         <AiOutlineCheckCircle />

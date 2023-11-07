@@ -1,5 +1,9 @@
 "use client";
-import { getDesignationData, updateDesignationData } from "@/store/designation";
+import {
+  addDesignationData,
+  getDesignationData,
+  updateDesignationData,
+} from "@/store/designation";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -10,6 +14,8 @@ import Button from "@/components/ui/Button";
 export default function DesignationPage() {
   let no = 0;
   const [data, setData] = useState([]);
+  const [addData, setAddData] = useState();
+
   const dispatch = useDispatch();
 
   const token = useSelector((state) => state.auth.isAuth.token);
@@ -17,11 +23,13 @@ export default function DesignationPage() {
     (state) => state.designation.designationData
   );
   const designationText = useSelector((state) => state.designation.text);
+  const newDesignationData = useSelector((state) => state.designation.newData);
 
   useEffect(() => {
-    console.log("In useEffect of designation update");
-    if (designationText) dispatch(getDesignationData(token));
-  }, [designationText]);
+    console.log("In useEffect of designation update or add");
+    if (designationText || newDesignationData)
+      dispatch(getDesignationData(token));
+  }, [designationText, newDesignationData]);
 
   useEffect(() => {
     console.log("In useEffect of designation data");
@@ -43,12 +51,59 @@ export default function DesignationPage() {
     dispatch(updateDesignationData(token, id, val));
   }
 
+  function addDesignation() {
+    console.log("addData", addData);
+    dispatch(addDesignationData(token, addData));
+    setAddData();
+  }
+
+  function removeDesignation(id) {
+    console.log("id", id);
+    // dispatch(addDesignationData(token, addData));
+    // setAddData();
+  }
+
   console.log("Above return function");
 
   return (
     <>
-      <div className="m-4">
-        <h5>Designation page</h5>
+      <div className="m-4 flex justify-between">
+        <div>
+          {" "}
+          <h5>Designation page</h5>
+        </div>
+        <div>
+          <Modal
+            title="Add Designation"
+            label="Add"
+            icon="heroicons-outline:plus-sm"
+            iconClass="text-lg"
+            labelClass="btn-primary  rounded-[999px]"
+            uncontrol
+            centered
+            footerContent={
+              <Button
+                text="Save"
+                className="btn-dark "
+                onClick={() => addDesignation()}
+              />
+            }
+          >
+            <form>
+              <div class="mb-4">
+                <input
+                  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  id="saveDesignation"
+                  type="text"
+                  value={addData}
+                  onChange={(e) => {
+                    setAddData(e.target.value);
+                  }}
+                />
+              </div>
+            </form>
+          </Modal>{" "}
+        </div>{" "}
       </div>
       <section>
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -105,7 +160,36 @@ export default function DesignationPage() {
                             />
                           </div>
                         </form>
-                        {/* <div className="text-base text-slate-600 dark:text-slate-300"></div> */}
+                      </Modal>
+                      <Modal
+                        title="Remove Designation"
+                        label="Remove"
+                        icon="heroicons-outline:plus-sm"
+                        iconClass="text-lg"
+                        labelClass="btn-danger rounded-[999px]"
+                        uncontrol
+                        centered
+                        // closeModal={closeModal()}
+                        footerContent={
+                          <Button
+                            text="Remove"
+                            className="btn-dark "
+                            // onClick={inputValue}
+                            onClick={() => removeDesignation(uData.id)}
+                          />
+                        }
+                      >
+                        <form>
+                          <div class="mb-4">
+                            <input
+                              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                              id="username"
+                              type="text"
+                              value={uData.designation}
+                              // Value={uData.designation}
+                            />
+                          </div>
+                        </form>
                       </Modal>
                     </td>
                   </tr>
