@@ -5,7 +5,7 @@ import Textarea from "@/components/ui/Textarea";
 import Button from "@/components/ui/Button";
 import Card from "@/components/ui/Card";
 import Icon from "@/components/ui/Icon";
-import { useForm } from "react-hook-form";
+import { useForm, useFieldArray } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import Radio from "@/components/ui/Radio";
@@ -13,6 +13,9 @@ import Flatpickr from "react-flatpickr";
 
 import Select from "@/components/ui/Select";
 import Fileinput from "@/components/ui/Fileinput";
+import EducationFormRepeater from "./EducationFormRepeater";
+import ExperienceFormRepeater from "./ExperienceFormRepeater";
+import Switch from "@/components/ui/Switch";
 
 const steps = [
   {
@@ -30,6 +33,10 @@ const steps = [
   {
     id: 4,
     title: "Experience Information",
+  },
+  {
+    id: 5,
+    title: "Salery Rivision",
   },
 
   {
@@ -69,6 +76,7 @@ let experienceSchema = yup.object().shape({
   //   .matches(url, "Facebook url is not valid"),
 });
 let certificationSchema = yup.object().shape({});
+let salarySchema = yup.object().shape({});
 
 let settingSchema = yup.object().shape({});
 
@@ -92,9 +100,12 @@ function AddStaff() {
       currentStepSchema = experienceSchema;
       break;
     case 4:
-      currentStepSchema = certificationSchema;
+      currentStepSchema = salarySchema;
       break;
     case 5:
+      currentStepSchema = certificationSchema;
+      break;
+    case 6:
       currentStepSchema = settingSchema;
       break;
     default:
@@ -128,6 +139,10 @@ function AddStaff() {
 
   const handlePrev = () => {
     setStepNumber(stepNumber - 1);
+  };
+
+  const handleNext = (item) => {
+    console.log("Handle next", item);
   };
 
   const [value, setValue] = useState("A");
@@ -175,10 +190,22 @@ function AddStaff() {
     setSelectedFiles2(filesArray);
   };
 
+  const [checked, setChecked] = useState(true);
+  const [checked1, setChecked1] = useState(true);
+  const [checked2, setChecked2] = useState(true);
+  const [checked3, setChecked3] = useState(true);
+  const [checked4, setChecked4] = useState(true);
+  const [checked5, setChecked5] = useState(true);
+  const [checked6, setChecked6] = useState(true);
+  const [checked7, setChecked7] = useState(true);
+  const [checked8, setChecked8] = useState(true);
+  const [checked9, setChecked9] = useState(true);
+  const [checked10, setChecked10] = useState(true);
+
   return (
     <div>
       <Card>
-        <div className="grid gap-5 grid-cols-12">
+        <div className="grid gap-5 grid-cols-12 min-h-[500px]">
           <div className="lg:col-span-3 col-span-12">
             <div className="flex z-[5] items-start relative flex-col lg:min-h-full md:min-h-[300px] min-h-[250px]">
               {steps.map((item, i) => (
@@ -202,7 +229,7 @@ function AddStaff() {
                   </div>
 
                   <div
-                    className={` ${
+                    className={`bg-gre ${
                       stepNumber >= i
                         ? "bg-blue-800 dark:bg-slate-900"
                         : "bg-[#E0EAFF] dark:bg-slate-600"
@@ -232,7 +259,7 @@ function AddStaff() {
                       type="text"
                       placeholder=""
                       name="firstname"
-                      required
+                      //required
                       register={register}
                     />
                     <Textinput
@@ -240,7 +267,7 @@ function AddStaff() {
                       type="text"
                       placeholder=""
                       name="middlename"
-                      required
+                      //required
                       register={register}
                     />
 
@@ -249,7 +276,7 @@ function AddStaff() {
                       type="text"
                       placeholder="Full name"
                       name="fullname"
-                      required
+                      //required
                       register={register}
                     />
                     <Textinput
@@ -257,7 +284,7 @@ function AddStaff() {
                       type="email"
                       placeholder="Type your email"
                       name="email"
-                      required
+                      //required
                       register={register}
                     />
                     <InputGroup
@@ -266,7 +293,7 @@ function AddStaff() {
                       prepend="IN (+91)"
                       placeholder="Phone Number"
                       name="phone"
-                      required
+                      //required
                       register={register}
                     />
                     <InputGroup
@@ -297,7 +324,7 @@ function AddStaff() {
                       type="number"
                       placeholder=""
                       name="user_id"
-                      required
+                      //required
                       register={register}
                     />
 
@@ -339,7 +366,7 @@ function AddStaff() {
                       type="text"
                       placeholder="Full name"
                       name="address"
-                      required
+                      //required
                       register={register}
                     />
                     <Textinput
@@ -347,7 +374,7 @@ function AddStaff() {
                       type="text"
                       placeholder="Full name"
                       name="permaddress"
-                      required
+                      //required
                       register={register}
                     />
 
@@ -356,7 +383,7 @@ function AddStaff() {
                       type="password"
                       placeholder=""
                       name="password"
-                      required
+                      //required
                       register={register}
                     />
 
@@ -390,6 +417,11 @@ function AddStaff() {
               {stepNumber === 1 && (
                 <div>
                   <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5">
+                    <div className="lg:col-span-3 md:col-span-2 col-span-1">
+                      <h4 className="text-2xl text-slate-800 dark:text-slate-300 mb-0">
+                        Personal Information
+                      </h4>
+                    </div>
                     <div className="radio-btns">
                       <div className="mb-2">Gender</div>
                       <div className="flex flex-wrap space-xy-5">
@@ -440,7 +472,7 @@ function AddStaff() {
                       type="text"
                       placeholder=" "
                       name="spousename"
-                      required
+                      //required
                       register={register}
                     />
                     <Textinput
@@ -448,7 +480,7 @@ function AddStaff() {
                       type="text"
                       placeholder=" "
                       name="mother_name"
-                      required
+                      //required
                       register={register}
                     />
                     <Textinput
@@ -456,7 +488,7 @@ function AddStaff() {
                       type="text"
                       placeholder=" "
                       name="mother_name"
-                      required
+                      //required
                       register={register}
                     />
                     <div className="floating-label date-input">
@@ -492,7 +524,7 @@ function AddStaff() {
                       type="text"
                       placeholder=" "
                       name="emergency_contact_relation"
-                      required
+                      //required
                       register={register}
                     />
                     <Textinput
@@ -500,7 +532,7 @@ function AddStaff() {
                       type="text"
                       placeholder=" "
                       name="emergency_person_number"
-                      required
+                      //required
                       register={register}
                     />
 
@@ -523,17 +555,23 @@ function AddStaff() {
                       type="text"
                       placeholder=" "
                       name="identification_mark"
-                      required
+                      //required
                       register={register}
                     />
+                    <div className="lg:col-span-3 md:col-span-2 col-span-1">
+                      <h4 className="text-2xl text-slate-800 dark:text-slate-300 mb-0">
+                        Identity Information
+                      </h4>
+                    </div>
                     <Textinput
                       label="aadhar card "
                       type="text"
                       placeholder=" "
                       name="aadhar_card"
-                      required
+                      //required
                       register={register}
                     />
+
                     <div className="file-input">
                       <p className="file-label">Upload AAdhar Card</p>
                       <Fileinput
@@ -547,7 +585,7 @@ function AddStaff() {
                       type="text"
                       placeholder=" "
                       name="pan_card"
-                      required
+                      //required
                       register={register}
                     />
                     <div className="file-input">
@@ -557,6 +595,11 @@ function AddStaff() {
                         selectedFile={selectedFileforPan}
                         onChange={handleFileChangeForPan}
                       />
+                    </div>
+                    <div className="lg:col-span-3 md:col-span-2 col-span-1">
+                      <h4 className="text-2xl text-slate-800 dark:text-slate-300 mb-0">
+                        Bank Details
+                      </h4>
                     </div>
                     <Textinput
                       label="bank name"
@@ -570,7 +613,7 @@ function AddStaff() {
                       type="text"
                       placeholder=" "
                       name="bank_account_no"
-                      required
+                      //required
                       register={register}
                     />
                     <Textinput
@@ -578,7 +621,7 @@ function AddStaff() {
                       type="text"
                       placeholder=" "
                       name="Ifsc_code"
-                      required
+                      //required
                       register={register}
                     />
                     <Textinput
@@ -609,95 +652,174 @@ function AddStaff() {
               )}
               {stepNumber === 2 && (
                 <div>
-                  <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5">
-                    <Textinput
-                      label="Degree Name"
-                      type="text"
-                      placeholder=""
-                      name="education_name"
-                      register={register}
-                    />
-                    <div className="file-input">
-                      <p className="file-label">Upload Marksheet</p>
-                      <Fileinput
-                        name="passbook"
-                        selectedFile={selectedFileforMarksheet}
-                        onChange={handleFileChangeForMarksheet}
-                      />
-                    </div>
-
-                    <Textinput
-                      label="collge name"
-                      type="text"
-                      placeholder=""
-                      name="collge_name"
-                      register={register}
-                    />
-
-                    <Textinput
-                      label="passout year"
-                      type="text"
-                      placeholder=""
-                      name="passout_year"
-                      register={register}
-                    />
-                  </div>
+                  <EducationFormRepeater />
                 </div>
               )}
               {stepNumber === 3 && (
                 <div>
-                  <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5">
-                    <div className="lg:col-span-3 md:col-span-2 col-span-1">
-                      <h4 className="text-base text-slate-800 dark:text-slate-300 mb-6">
-                        Enter Your Address
-                      </h4>
-                    </div>
-                    <Textinput
-                      label="Facebook"
-                      type="text"
-                      placeholder="https://www.facebook.com/profile"
-                      name="fburl"
-                      error={errors.fburl}
-                      register={register}
-                    />
-                  </div>
+                  <ExperienceFormRepeater></ExperienceFormRepeater>
                 </div>
               )}
               {stepNumber === 4 && (
                 <div>
                   <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5">
                     <div className="lg:col-span-3 md:col-span-2 col-span-1">
-                      <h4 className="text-base text-slate-800 dark:text-slate-300 mb-6">
-                        Enter Your Address
+                      <h4 className="text-2xl text-slate-800 dark:text-slate-300 mb-0">
+                        Salary Rivision
                       </h4>
                     </div>
                     <Textinput
-                      label="Facebook"
+                      label="new gross salary"
                       type="text"
-                      placeholder="https://www.facebook.com/profile"
-                      name="fburl"
-                      error={errors.fburl}
+                      placeholder=""
+                      name="new_gross_salary"
                       register={register}
                     />
+                    <Textinput
+                      label="revision document"
+                      type="text"
+                      placeholder=""
+                      name="revision_document"
+                      register={register}
+                    />
+                    <div className="floating-label date-input">
+                      <Flatpickr
+                        value={picker}
+                        id="hf-picker"
+                        className="form-control py-2"
+                        onChange={(date) => setPicker(date)}
+                        options={{
+                          altInput: true,
+                          altFormat: "F j, Y",
+                          dateFormat: "Y-m-d",
+                        }}
+                      />
+                      <label>Effective Date</label>
+                    </div>
                   </div>
                 </div>
               )}
-
               {stepNumber === 5 && (
                 <div>
                   <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5">
                     <div className="lg:col-span-3 md:col-span-2 col-span-1">
-                      <h4 className="text-base text-slate-800 dark:text-slate-300 mb-6">
-                        Enter Your Address
+                      <h4 className="text-2xl text-slate-800 dark:text-slate-300 mb-0">
+                        Certification
                       </h4>
                     </div>
                     <Textinput
-                      label="Facebook"
+                      label="course name"
                       type="text"
-                      placeholder="https://www.facebook.com/profile"
-                      name="fburl"
-                      error={errors.fburl}
+                      placeholder=""
+                      name="course_name"
                       register={register}
+                    />
+                    <Textinput
+                      label="certification"
+                      type="text"
+                      placeholder=""
+                      name="certification"
+                      register={register}
+                    />
+                    <div className="floating-label date-input">
+                      <Flatpickr
+                        value={picker}
+                        id="hf-picker"
+                        className="form-control py-2"
+                        onChange={(date) => setPicker(date)}
+                        options={{
+                          altInput: true,
+                          altFormat: "F j, Y",
+                          dateFormat: "Y-m-d",
+                        }}
+                      />
+                      <label>certification dates</label>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {stepNumber === 6 && (
+                <div>
+                  <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5">
+                    <div className="lg:col-span-3 md:col-span-2 col-span-1">
+                      <h4 className="text-2xl text-slate-800 dark:text-slate-300 mb-0">
+                        User Profile Settings{" "}
+                      </h4>
+                    </div>
+                    <Switch
+                      className="mt-20"
+                      label="Location Restriction "
+                      activeClass="bg-primary-500"
+                      value={checked}
+                      onChange={() => setChecked(!checked)}
+                    />
+
+                    <Switch
+                      label="blocked "
+                      activeClass="bg-primary-500"
+                      value={checked3}
+                      onChange={() => setChecked3(!checked3)}
+                    />
+
+                    <Switch
+                      label="Face Detection"
+                      activeClass="bg-primary-500"
+                      value={checked4}
+                      onChange={() => setChecked4(!checked4)}
+                    />
+                    <Switch
+                      label="App Access"
+                      activeClass="bg-primary-500"
+                      value={checked5}
+                      onChange={() => setChecked5(!checked5)}
+                    />
+                    <Switch
+                      label="Website Access"
+                      activeClass="bg-primary-500"
+                      value={checked6}
+                      onChange={() => setChecked6(!checked6)}
+                    />
+                    <Switch
+                      label="Leave Accept Access "
+                      activeClass="bg-primary-500"
+                      value={checked7}
+                      onChange={() => setChecked7(!checked7)}
+                    />
+                    <Switch
+                      label="Biometric Access"
+                      activeClass="bg-primary-500"
+                      value={checked8}
+                      onChange={() => setChecked8(!checked8)}
+                    />
+                    <Switch
+                      label="Emp Id Verify"
+                      activeClass="bg-primary-500"
+                      value={checked9}
+                      onChange={() => setChecked9(!checked9)}
+                    />
+                    <Switch
+                      label="Chatting"
+                      activeClass="bg-primary-500"
+                      value={checked10}
+                      onChange={() => setChecked10(!checked10)}
+                    />
+                    <Select
+                      options={[
+                        "Shift Policy 1",
+                        "Shift Policy 2",
+                        "Shift Policy 3",
+                        "Shift Policy 4",
+                      ]}
+                      label="shift policy"
+                    />
+                    <Select
+                      options={["Sunday", "Monday", "Weekend"]}
+                      label="weekly off"
+                    />
+                    <Select
+                      options={["Branch 1", "Branch 2", "Branch 3", "Branch 4"]}
+                      label="Branch"
                     />
                   </div>
                 </div>
@@ -722,6 +844,7 @@ function AddStaff() {
                   type="submit"
                   icon="ant-design:double-right-outlined"
                   iconPosition="right"
+                  onClick={handleNext}
                 />
               </div>
             </form>

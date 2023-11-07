@@ -10,8 +10,8 @@ const Swicth = ({
   value,
   onChange,
   activeClass = "bg-slate-900 dark:bg-slate-900",
-  wrapperClass = " ",
-  labelClass = "text-slate-500 dark:text-slate-400 text-sm leading-6",
+  wrapperClass = "mt-5 ",
+  labelClass = "text-grey-500 dark:text-slate-400  leading-6 text-md",
   badge,
 }) => {
   return (
