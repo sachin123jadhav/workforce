@@ -4,6 +4,7 @@ import Modal from "@/components/ui/Modal";
 import {
   addEmploymentData,
   getemploymentData,
+  removeEmployementData,
   updateemploymentData,
 } from "@/store/employment";
 import Button from "@/components/ui/Button";
@@ -55,6 +56,12 @@ export default function Employment() {
     // console.log("addEmployment", addData.length);
     dispatch(addEmploymentData(token, addData));
     setAddData();
+  }
+
+  function removeEmployement(id) {
+    console.log("id", id);
+    dispatch(removeEmployementData(token, id));
+    // setAddData();
   }
 
   const headerList = ["Sr No", "employment", "Action"];
@@ -150,6 +157,36 @@ export default function Employment() {
                               id="username"
                               type="text"
                               defaultValue={uData.employment_type}
+                            />
+                          </div>
+                        </form>
+                      </Modal>
+                      <Modal
+                        title="Remove Employment"
+                        label="Remove"
+                        icon="heroicons-outline:plus-sm"
+                        iconClass="text-lg"
+                        labelClass="btn-danger rounded-[999px]"
+                        uncontrol
+                        centered
+                        // closeModal={closeModal()}
+                        footerContent={
+                          <Button
+                            text="Remove"
+                            className="btn-dark "
+                            // onClick={inputValue}
+                            onClick={() => removeEmployement(uData.id)}
+                          />
+                        }
+                      >
+                        <form>
+                          <div class="mb-4">
+                            <input
+                              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                              id="username"
+                              type="text"
+                              value={uData.employment_type}
+                              // Value={uData.designation}
                             />
                           </div>
                         </form>

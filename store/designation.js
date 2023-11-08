@@ -89,28 +89,27 @@ export const addDesignationData =
     }
   };
 
-export const removeDesignationData =
-  (token, id, designationData) => async (dispatch) => {
-    const localHeader = {
-      Authorization: `Token ${token}`,
-    };
-    const bodyData = {
-      designation: designationData,
-    };
-    try {
-      console.log("in remove function of designation");
-      const res = await axios({
-        method: "DELETE",
-        url: API_HOST + `/users/api/v1/designation/${id}/`,
-        headers: localHeader,
-        data: bodyData,
-      });
-      console.log("In remove designationList ", res);
-      dispatch(postUpdate(res.data));
-    } catch (error) {
-      console.log("In designationList error", error);
-    }
+export const removeDesignationData = (token, id) => async (dispatch) => {
+  const localHeader = {
+    Authorization: `Token ${token}`,
   };
+  // const bodyData = {
+  //   designation: designationData,
+  // };
+  try {
+    console.log("in remove function of designation");
+    const res = await axios({
+      method: "DELETE",
+      url: API_HOST + `/users/api/v1/designation/${id}/`,
+      headers: localHeader,
+      // data: bodyData,
+    });
+    console.log("In remove designationList ", res);
+    // dispatch(postUpdate(res.data));
+  } catch (error) {
+    console.log("In designationList error", error);
+  }
+};
 
 export const { postSuccess, postUpdate, postAdd } = designation.actions;
 export default designation.reducer;

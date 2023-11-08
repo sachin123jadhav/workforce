@@ -7,6 +7,7 @@ import designation from "./designation";
 import department from "./department";
 import employment from "./employment";
 import companyprofile from "./companyprofile";
+import mapdata from "./mapdata";
 
 const rootReducer = combineReducers({
   layout,
@@ -17,5 +18,6 @@ const rootReducer = combineReducers({
   department,
   employment,
   companyprofile,
+  mapdata,
 });
 export default rootReducer;

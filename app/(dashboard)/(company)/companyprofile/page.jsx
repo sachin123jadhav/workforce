@@ -49,9 +49,9 @@ export default function CompanyProfilePage() {
     dispatch(updatecompanyprofileData(token, id, val));
   }
 
-  function handleClick() {
-    router.push("/addbranch");
-  }
+  // function handleClick() {
+  //   router.push("/addbranch");
+  // }
 
   // const headerList = [
   //   "Sr No",
@@ -89,48 +89,12 @@ export default function CompanyProfilePage() {
             <h5>Company Profile page</h5>{" "}
           </div>
           <div>
-            {/* <button
-              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
-              onClick={handleClick}
-            >
-              Add
-            </button> */}
             <Link
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
               href="/addbranch"
             >
               Add
             </Link>
-            {/* <Modal
-              title="Add Employment"
-              label="Add"
-              icon="heroicons-outline:plus-sm"
-              iconClass="text-lg"
-              labelClass="btn-primary  rounded-[999px]"
-              uncontrol
-              centered
-              footerContent={
-                <Button
-                  text="Save"
-                  className="btn-dark "
-                  // onClick={() => addEmployment()}
-                />
-              }
-            >
-              <form>
-                <div class="mb-4">
-                  <input
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="saveDesignation"
-                    type="text"
-                    // value={addData}
-                    onChange={(e) => {
-                      // setAddData(e.target.value);
-                    }}
-                  />
-                </div>
-              </form>
-            </Modal>{" "} */}
           </div>{" "}
         </div>
       </section>
@@ -149,11 +113,12 @@ export default function CompanyProfilePage() {
               </tr>
             </thead>
             <tbody>
-              {data?.map((uData, i) => {
+              {data?.map((uData) => {
                 no = no + 1;
+                // console.log(uData)
                 return (
                   <tr
-                    key={i}
+                    key={uData.id}
                     className="bg-white border-b dark:bg-gray-900 dark:border-gray-700"
                   >
                     <td className="px-6 py-4">{no}</td>
@@ -193,7 +158,7 @@ export default function CompanyProfilePage() {
                         }
                       >
                         <form>
-                          <div class="mb-4">
+                          <div className="mb-4">
                             {" "}
                             <label
                               class="block text-gray-700 text-sm font-bold mb-2"
@@ -202,7 +167,7 @@ export default function CompanyProfilePage() {
                               Branch Name
                             </label>
                             <input
-                              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                               id="branchname"
                               type="text"
                               defaultValue={uData.branch_name}
@@ -214,7 +179,7 @@ export default function CompanyProfilePage() {
                               ADDRESS
                             </label>
                             <input
-                              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                               id="address"
                               type="text"
                               defaultValue={uData.branch_address}
@@ -226,7 +191,7 @@ export default function CompanyProfilePage() {
                               BRANCH MANAGER
                             </label>
                             <input
-                              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                               id="branchmanager"
                               type="text"
                               defaultValue={uData.branch_manager}
@@ -238,7 +203,7 @@ export default function CompanyProfilePage() {
                               COUNTRY CODE
                             </label>
                             <input
-                              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                               id="countrycode"
                               type="text"
                               defaultValue={uData.country_code}
@@ -250,7 +215,7 @@ export default function CompanyProfilePage() {
                               BRANCH NUMBER
                             </label>
                             <input
-                              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                               id="branchno"
                               type="text"
                               defaultValue={uData.branch_number}
@@ -262,7 +227,7 @@ export default function CompanyProfilePage() {
                               LATITUDE
                             </label>
                             <input
-                              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                               id="latitude"
                               type="text"
                               defaultValue={uData.latitude}
@@ -274,7 +239,7 @@ export default function CompanyProfilePage() {
                               LONGITUDE
                             </label>
                             <input
-                              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                               id="longitude"
                               type="text"
                               defaultValue={uData.longitude}
@@ -286,7 +251,7 @@ export default function CompanyProfilePage() {
                               RADIUS
                             </label>
                             <input
-                              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                               id="radius"
                               type="text"
                               defaultValue={uData.radius}
@@ -298,7 +263,7 @@ export default function CompanyProfilePage() {
                               LOCATION
                             </label>
                             <input
-                              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                               id="location"
                               type="text"
                               defaultValue={uData.location}
@@ -310,7 +275,7 @@ export default function CompanyProfilePage() {
                               ACTIVE
                             </label>
                             <input
-                              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                               id="active"
                               type="text"
                               defaultValue={uData.active}

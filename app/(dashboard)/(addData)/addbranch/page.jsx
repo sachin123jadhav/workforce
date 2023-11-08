@@ -3,7 +3,19 @@ import Textinput from "@/components/ui/Textinput";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+// import LeafletMap from "@/components/ui/LeafletMap";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { setLocation } from "@/store/mapdata";
+
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  useMapEvents,
+  Circle,
+} from "react-leaflet";
 
 const FormValidationSchema = yup.object({
   branchName: yup.string().required("Branch Name is Required"),
@@ -21,6 +33,19 @@ export default function AddBrnach() {
   } = useForm({
     resolver: yupResolver(FormValidationSchema),
     mode: "all",
+  });
+
+  const dispatch = useDispatch();
+
+  const [lat, setLat] = useState();
+  const [long, setLong] = useState();
+
+  const [center, setCenter] = useState([20.5937, 78.9629]);
+  const [clickedCoordinates, setClickedCoordinates] = useState(null);
+
+  const [locdata, setLocData] = useState({
+    latitude: "",
+    longitude: "",
   });
 
   const [formData, setFormData] = useState({
@@ -41,6 +66,43 @@ export default function AddBrnach() {
     console.log("data", data);
     console.log("Stored Input Data:", formData);
   };
+
+  const location_Data = useSelector((state) => state.mapdata);
+  console.log("location_Data", location_Data);
+
+  useEffect(() => {
+    console.log("In use effect of location_data")
+    if (location_Data) {
+      setLat(location_Data.latitude);
+      setLong(location_Data.longitude);
+    }
+  }, [location_Data]);
+
+  useEffect(() => {
+    console.log("you call me in add branch");
+    dispatch(setLocation(locdata));
+  }, []);
+
+  useEffect(() => {
+    console.log("in use effect when change locdata");
+    if (locdata) {
+      console.log("locdata", locdata);
+      dispatch(setLocation(locdata));
+    }
+    // console.log("Location found:", clickedCoordinates);
+  }, [locdata]);
+
+  function MyComponent() {
+    const map = useMapEvents({
+      click: (e) => {
+        const { lat, lng } = e.latlng;
+        // setClickedCoordinates([lat, lng]);
+        setLocData({ latitude: lat, longitude: lng });
+      },
+    });
+    return null;
+  }
+
   return (
     <>
       <section>
@@ -51,8 +113,10 @@ export default function AddBrnach() {
       </section>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 ">
-        <div class="grid gap-5 grid-cols-2 divide-x">
+        <div className="grid gap-5 grid-cols-2 divide-x">
           <div>
+            <input type="text" defaultValue={lat} />
+            <input type="text" defaultValue={long} />
             <Textinput
               name="branchName"
               label="Branch Name"
@@ -64,8 +128,6 @@ export default function AddBrnach() {
               onChange={handleInputChange}
               error={errors.branchName}
             />
-          </div>
-          <div>
             <Textinput
               name="address"
               label="Address"
@@ -77,8 +139,6 @@ export default function AddBrnach() {
               onChange={handleInputChange}
               error={errors.address}
             />{" "}
-          </div>
-          <div>
             <Textinput
               name="branchManager"
               label="Branch Manager"
@@ -90,8 +150,6 @@ export default function AddBrnach() {
               onChange={handleInputChange}
               error={errors.branchManager}
             />{" "}
-          </div>
-          <div>
             <Textinput
               name="branchNo"
               label="Branch No"
@@ -103,8 +161,6 @@ export default function AddBrnach() {
               onChange={handleInputChange}
               error={errors.branchNo}
             />{" "}
-          </div>
-          <div>
             <Textinput
               name="email"
               label="email"
@@ -115,6 +171,66 @@ export default function AddBrnach() {
               onChange={handleInputChange}
               error={errors.email}
             />
+            <Textinput
+              name="latitude"
+              label="latitude"
+              type="latitude"
+              // value={location_Data.latitude}
+              register={register}
+              // {...register("email", { required: true })}
+              // value={formData.email}
+              onChange={handleInputChange}
+              error={errors.latitude}
+            />
+            <Textinput
+              name="longitude"
+              label="longitude"
+              type="longitude"
+              // value={location_Data.longitude}
+              register={register}
+              // {...register("email", { required: true })}
+              // value={formData.email}
+              onChange={handleInputChange}
+              error={errors.longitude}
+            />
+            <Textinput
+              name="radius"
+              label="radius"
+              type="radius"
+              register={register}
+              // {...register("email", { required: true })}
+              // value={formData.email}
+              onChange={handleInputChange}
+              error={errors.radius}
+            />
+          </div>
+
+          <div className="mt-8">
+            {/* <LeafletMap /> */}
+            <div>
+              <MapContainer
+                center={center}
+                zoom={10}
+                style={{ width: "100%", height: "500px" }}
+                onClick={(e) => console.log(e)}
+              >
+                <TileLayer
+                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                />
+                <MyComponent></MyComponent>
+
+                {clickedCoordinates && (
+                  <Marker position={clickedCoordinates}>
+                    <Circle
+                      center={clickedCoordinates}
+                      fillColor="blue"
+                      radius={500}
+                    />
+                  </Marker>
+                )}
+              </MapContainer>
+            </div>
           </div>
 
           <div className="ltr:text-right rtl:text-left">
@@ -122,66 +238,6 @@ export default function AddBrnach() {
           </div>
         </div>
       </form>
-      {/* <section>
-        <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-          <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-              <tr>
-                {headerList.map((header) => {
-                  return (
-                    <th scope="col" className="px-6 py-3">
-                      {header}
-                    </th>
-                  );
-                })}
-              </tr>
-            </thead>
-            <tbody>
-              {data?.map((uData, i) => {
-                no = no + 1;
-                return (
-                  <tr
-                    key={i}
-                    className="bg-white border-b dark:bg-gray-900 dark:border-gray-700"
-                  >
-                    <td className="px-6 py-4">{no}</td>
-                    <td className="px-6 py-4">{uData.employment_type}</td>
-                    <td className="px-6 py-4">
-                      <Modal
-                        title="Update Employment"
-                        label="Update"
-                        icon="heroicons-outline:plus-sm"
-                        iconClass="text-lg"
-                        labelClass="btn-primary  rounded-[999px]"
-                        uncontrol
-                        centered
-                        footerContent={
-                          <Button
-                            text="Update"
-                            className="btn-dark "
-                            onClick={() => handleChange(uData.id)}
-                          />
-                        }
-                      >
-                        <form>
-                          <div class="mb-4">
-                            <input
-                              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                              id="username"
-                              type="text"
-                              defaultValue={uData.employment_type}
-                            />
-                          </div>
-                        </form>
-                      </Modal>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
-      </section>{" "} */}
     </>
   );
 }

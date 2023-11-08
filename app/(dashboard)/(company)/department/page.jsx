@@ -4,6 +4,7 @@ import Modal from "@/components/ui/Modal";
 import {
   addDepartmentData,
   getdepartmentData,
+  removeDepartmentData,
   updatedepartmentData,
 } from "@/store/department";
 import Button from "@/components/ui/Button";
@@ -49,6 +50,12 @@ export default function Department() {
     console.log("addDapartment", addData);
     dispatch(addDepartmentData(token, addData));
     setAddData();
+  }
+
+  function removeDepartment(id) {
+    console.log("id", id);
+    dispatch(removeDepartmentData(token, id));
+    // setAddData();
   }
 
   const headerList = ["Sr No", "Department", "Action"];
@@ -142,6 +149,36 @@ export default function Department() {
                               id="username"
                               type="text"
                               defaultValue={uData.department}
+                            />
+                          </div>
+                        </form>
+                      </Modal>
+                      <Modal
+                        title="Remove Department"
+                        label="Remove"
+                        icon="heroicons-outline:plus-sm"
+                        iconClass="text-lg"
+                        labelClass="btn-danger rounded-[999px]"
+                        uncontrol
+                        centered
+                        // closeModal={closeModal()}
+                        footerContent={
+                          <Button
+                            text="Remove"
+                            className="btn-dark "
+                            // onClick={inputValue}
+                            onClick={() => removeDepartment(uData.id)}
+                          />
+                        }
+                      >
+                        <form>
+                          <div class="mb-4">
+                            <input
+                              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                              id="username"
+                              type="text"
+                              value={uData.department}
+                              // Value={uData.designation}
                             />
                           </div>
                         </form>

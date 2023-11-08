@@ -2,6 +2,7 @@
 import {
   addDesignationData,
   getDesignationData,
+  removeDesignationData,
   updateDesignationData,
 } from "@/store/designation";
 import { useEffect, useState } from "react";
@@ -59,7 +60,7 @@ export default function DesignationPage() {
 
   function removeDesignation(id) {
     console.log("id", id);
-    // dispatch(addDesignationData(token, addData));
+    dispatch(removeDesignationData(token, id));
     // setAddData();
   }
 

@@ -89,5 +89,27 @@ export const addEmploymentData =
     }
   };
 
+export const removeEmployementData = (token, id) => async (dispatch) => {
+  const localHeader = {
+    Authorization: `Token ${token}`,
+  };
+  // const bodyData = {
+  //   designation: designationData,
+  // };
+  try {
+    console.log("in remove function of employement");
+    const res = await axios({
+      method: "DELETE",
+      url: API_HOST + `/users/api/v1/employement/${id}/`,
+      headers: localHeader,
+      // data: bodyData,
+    });
+    console.log("In remove employementList ", res);
+    // dispatch(postUpdate(res.data));
+  } catch (error) {
+    console.log("In employementList error", error);
+  }
+};
+
 export const { postSuccess, postUpdate, postAdd } = employment.actions;
 export default employment.reducer;

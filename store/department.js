@@ -89,5 +89,27 @@ export const addDepartmentData =
     }
   };
 
+export const removeDepartmentData = (token, id) => async (dispatch) => {
+  const localHeader = {
+    Authorization: `Token ${token}`,
+  };
+  // const bodyData = {
+  //   designation: designationData,
+  // };
+  try {
+    console.log("in remove function of department");
+    const res = await axios({
+      method: "DELETE",
+      url: API_HOST + `/users/api/v1/department/${id}/`,
+      headers: localHeader,
+      // data: bodyData,
+    });
+    console.log("In remove departmentList ", res);
+    // dispatch(postUpdate(res.data));
+  } catch (error) {
+    console.log("In departmentList error", error);
+  }
+};
+
 export const { postSuccess, postUpdate, postAdd } = department.actions;
 export default department.reducer;
