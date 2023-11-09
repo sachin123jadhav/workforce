@@ -4,10 +4,6 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useEffect, useState } from "react";
-// import LeafletMap from "@/components/ui/LeafletMap";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { setLocation } from "@/store/mapdata";
 
 import {
   MapContainer,
@@ -35,25 +31,22 @@ export default function AddBrnach() {
     mode: "all",
   });
 
-  const dispatch = useDispatch();
-
-  const [lat, setLat] = useState();
-  const [long, setLong] = useState();
-
-  const [center, setCenter] = useState([20.5937, 78.9629]);
+  const [radius, setRadius] = useState(100);
+  const [center, setCenter] = useState([18.530728828585875, 73.86214307956516]);
   const [clickedCoordinates, setClickedCoordinates] = useState(null);
-
   const [locdata, setLocData] = useState({
     latitude: "",
     longitude: "",
   });
-
   const [formData, setFormData] = useState({
     branchName: "",
     address: "",
     branchManager: "",
     branchNo: "",
     email: "",
+    latitude: "",
+    longitude: "",
+    radius: "",
   });
 
   const handleInputChange = (e) => {
@@ -62,47 +55,22 @@ export default function AddBrnach() {
   };
 
   const onSubmit = (data) => {
-    // alert("alert of onsubmit");
+    data.latitude = locdata.latitude;
+    data.longitude = locdata.longitude;
     console.log("data", data);
     console.log("Stored Input Data:", formData);
   };
-
-  const location_Data = useSelector((state) => state.mapdata);
-  console.log("location_Data", location_Data);
-
-  useEffect(() => {
-    console.log("In use effect of location_data")
-    if (location_Data) {
-      setLat(location_Data.latitude);
-      setLong(location_Data.longitude);
-    }
-  }, [location_Data]);
-
-  useEffect(() => {
-    console.log("you call me in add branch");
-    dispatch(setLocation(locdata));
-  }, []);
-
-  useEffect(() => {
-    console.log("in use effect when change locdata");
-    if (locdata) {
-      console.log("locdata", locdata);
-      dispatch(setLocation(locdata));
-    }
-    // console.log("Location found:", clickedCoordinates);
-  }, [locdata]);
 
   function MyComponent() {
     const map = useMapEvents({
       click: (e) => {
         const { lat, lng } = e.latlng;
-        // setClickedCoordinates([lat, lng]);
+        setClickedCoordinates([lat, lng]);
         setLocData({ latitude: lat, longitude: lng });
       },
     });
     return null;
   }
-
   return (
     <>
       <section>
@@ -115,8 +83,6 @@ export default function AddBrnach() {
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 ">
         <div className="grid gap-5 grid-cols-2 divide-x">
           <div>
-            <input type="text" defaultValue={lat} />
-            <input type="text" defaultValue={long} />
             <Textinput
               name="branchName"
               label="Branch Name"
@@ -134,8 +100,6 @@ export default function AddBrnach() {
               type="Address"
               placeholder="Address"
               register={register}
-              // {...register("address", { required: true })}
-              // value={formData.address}
               onChange={handleInputChange}
               error={errors.address}
             />{" "}
@@ -145,8 +109,6 @@ export default function AddBrnach() {
               type="Branch_Manager"
               placeholder="Branch Manager"
               register={register}
-              // {...register("branchManager", { required: true })}
-              // value={formData.branchManager}
               onChange={handleInputChange}
               error={errors.branchManager}
             />{" "}
@@ -156,8 +118,6 @@ export default function AddBrnach() {
               type="Branch_No"
               placeholder="Branch No"
               register={register}
-              // {...register("branchNo", { required: true })}
-              // value={formData.branchNo}
               onChange={handleInputChange}
               error={errors.branchNo}
             />{" "}
@@ -166,8 +126,6 @@ export default function AddBrnach() {
               label="email"
               type="email"
               register={register}
-              // {...register("email", { required: true })}
-              // value={formData.email}
               onChange={handleInputChange}
               error={errors.email}
             />
@@ -175,10 +133,9 @@ export default function AddBrnach() {
               name="latitude"
               label="latitude"
               type="latitude"
-              // value={location_Data.latitude}
+              disabled
+              defaultValue={locdata.latitude}
               register={register}
-              // {...register("email", { required: true })}
-              // value={formData.email}
               onChange={handleInputChange}
               error={errors.latitude}
             />
@@ -186,10 +143,9 @@ export default function AddBrnach() {
               name="longitude"
               label="longitude"
               type="longitude"
-              // value={location_Data.longitude}
+              disabled
+              defaultValue={locdata.longitude}
               register={register}
-              // {...register("email", { required: true })}
-              // value={formData.email}
               onChange={handleInputChange}
               error={errors.longitude}
             />
@@ -198,34 +154,37 @@ export default function AddBrnach() {
               label="radius"
               type="radius"
               register={register}
-              // {...register("email", { required: true })}
-              // value={formData.email}
-              onChange={handleInputChange}
+              defaultValue={radius}
+              onChange={(e) => {
+                setRadius(e.target.value);
+                // handleInputChange(e);
+                // console.log("object", radius);
+              }}
               error={errors.radius}
             />
           </div>
 
           <div className="mt-8">
-            {/* <LeafletMap /> */}
             <div>
               <MapContainer
                 center={center}
-                zoom={10}
+                zoom={100}
                 style={{ width: "100%", height: "500px" }}
                 onClick={(e) => console.log(e)}
               >
                 <TileLayer
-                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                  url="https://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}"
+                  maxZoom={20}
+                  subdomains={["mt1", "mt2", "mt3"]}
                 />
-                <MyComponent></MyComponent>
+                <MyComponent />
 
                 {clickedCoordinates && (
                   <Marker position={clickedCoordinates}>
                     <Circle
                       center={clickedCoordinates}
                       fillColor="blue"
-                      radius={500}
+                      radius={radius}
                     />
                   </Marker>
                 )}
