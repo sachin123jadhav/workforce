@@ -2383,6 +2383,18 @@ language-tags@=1.0.5:
   dependencies:
     language-subtag-registry "~0.3.2"
 
+leaflet-search@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/leaflet-search/-/leaflet-search-4.0.0.tgz#7265ab813ea915213027f30729a736cb4234402a"
+  integrity sha512-V+Y7DURVoy6Y9ZGywfyorDRMYDbLwpWPA0yec+g2aW+iNZySdwv936jDZJtRfYxvkPRMEb8jDjH+Zf3nSFTPEw==
+  dependencies:
+    leaflet "*"
+
+leaflet@*:
+  version "1.9.4"
+  resolved "https://registry.yarnpkg.com/leaflet/-/leaflet-1.9.4.tgz#23fae724e282fa25745aff82ca4d394748db7d8d"
+  integrity sha512-nxS1ynzJOmOlHp+iL3FyWqK89GtNL8U8rvlMOsQdTTssxZwCXh8N2NB3GDQOL+YR3XnWyZAxwQixURb+FA74PA==
+
 leaflet@^1.9.3:
   version "1.9.3"
   resolved "https://registry.npmjs.org/leaflet/-/leaflet-1.9.3.tgz"

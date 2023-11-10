@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useEffect, useState } from "react";
+// import { SearchControl, OpenStreetMapProvider } from 'react-leaflet-search';
 
 import {
   MapContainer,
@@ -12,6 +13,7 @@ import {
   useMapEvents,
   Circle,
 } from "react-leaflet";
+import { useRef } from "react";
 
 const FormValidationSchema = yup.object({
   branchName: yup.string().required("Branch Name is Required"),
@@ -31,7 +33,7 @@ export default function AddBrnach() {
     mode: "all",
   });
 
-  const [radius, setRadius] = useState(100);
+  const [radius, setRadius] = useState(10);
   const [center, setCenter] = useState([18.530728828585875, 73.86214307956516]);
   const [clickedCoordinates, setClickedCoordinates] = useState(null);
   const [locdata, setLocData] = useState({
@@ -71,10 +73,39 @@ export default function AddBrnach() {
     });
     return null;
   }
+
+  const [latLong, setLatLong] = useState({ lat: "", long: "" });
+  const [src, setSrc] = useState(
+    "https://maps.google.com/maps?q=${data.name}&t=&z=13&ie=UTF8&iwloc=&output=embed"
+  );
+  const ref = useRef();
+
+  async function handleLatLangSearch() {
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${ref.current.value}&appid=5f23020f60def816fd16544d01873d58`;
+    const data = await fetch(url)
+      .then((response) => response.json())
+      .then((data) => {
+        let long = data.coord.lon;
+        let lat = data.coord.lat;
+        console.log("long", long);
+        console.log("lat", lat);
+        setCenter([lat, long]);
+        setSrc(
+          `https://maps.google.com/maps?q=${ref.current.value}&t=&z=13&ie=UTF8&iwloc=&output=embed`
+        );
+      });
+  }
+
+  useEffect(() => {
+    if (center) console.log("center", center);
+  }, [center]);
+
   return (
     <>
       <section>
         {" "}
+        <input type="text" ref={ref} />
+        <button onClick={handleLatLangSearch}>SEARCH</button>
         <div className="m-4 flex justify-between">
           <h5>Add New Branch</h5>{" "}
         </div>
@@ -163,6 +194,18 @@ export default function AddBrnach() {
               error={errors.radius}
             />
           </div>
+          {console.log("centerrrrrrr", center)}
+
+          <iframe
+            width="600"
+            height="500"
+            id="gmap_canvas"
+            src={src}
+            frameborder="0"
+            scrolling="no"
+            marginheight="0"
+            marginwidth="0"
+          ></iframe>
 
           <div className="mt-8">
             <div>
@@ -180,15 +223,23 @@ export default function AddBrnach() {
                 <MyComponent />
 
                 {clickedCoordinates && (
-                  <Marker position={clickedCoordinates}>
-                    <Circle
-                      center={clickedCoordinates}
-                      fillColor="blue"
-                      radius={radius}
-                    />
-                  </Marker>
+                  // <Marker position={clickedCoordinates}>
+                  <Circle
+                    center={clickedCoordinates}
+                    fillColor="blue"
+                    radius={radius}
+                  />
+                  // </Marker>
                 )}
               </MapContainer>
+              {/* <SearchControl
+                provider={OpenStreetMapProvider()}
+                showMarker={false}
+                showPopup={false}
+                searchLabel="Enter address"
+                zoom={15}
+                position="topright"
+              /> */}
             </div>
           </div>
 
