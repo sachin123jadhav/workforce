@@ -211,11 +211,10 @@ function AddStaff() {
               {steps.map((item, i) => (
                 <div className="relative z-[1] flex-1 last:flex-none" key={i}>
                   <div
-                    className={`   ${
-                      stepNumber >= i
-                        ? "bg-blue-800 text-white ring-slate-900 dark:bg-slate-900 dark:ring-slate-700  dark:ring-offset-slate-500 ring-offset-2"
-                        : "bg-white ring-slate-900 ring-opacity-70  text-slate-900 dark:text-slate-300 text-opacity-70 dark:bg-slate-700 dark:ring-slate-700"
-                    } 
+                    className={`   ${stepNumber >= i
+                      ? "bg-blue-800 text-white ring-slate-900 dark:bg-slate-900 dark:ring-slate-700  dark:ring-offset-slate-500 ring-offset-2"
+                      : "bg-white ring-slate-900 ring-opacity-70  text-slate-900 dark:text-slate-300 text-opacity-70 dark:bg-slate-700 dark:ring-slate-700"
+                      } 
         transition duration-150 icon-box md:h-12 md:w-12 h-8 w-8 rounded-full flex flex-col items-center justify-center relative z-[66] ring-1 md:text-lg text-base font-medium
         `}
                   >
@@ -229,18 +228,16 @@ function AddStaff() {
                   </div>
 
                   <div
-                    className={`bg-gre ${
-                      stepNumber >= i
-                        ? "bg-blue-800 dark:bg-slate-900"
-                        : "bg-[#E0EAFF] dark:bg-slate-600"
-                    } absolute top-0 left-1/2 -translate-x-1/2 h-full w-[2px]`}
+                    className={`bg-gre ${stepNumber >= i
+                      ? "bg-blue-800 dark:bg-slate-900"
+                      : "bg-[#E0EAFF] dark:bg-slate-600"
+                      } absolute top-0 left-1/2 -translate-x-1/2 h-full w-[2px]`}
                   ></div>
                   <div
-                    className={` ${
-                      stepNumber >= i
-                        ? " text-slate-900 dark:text-slate-300"
-                        : "text-slate-500 dark:text-slate-300 dark:text-opacity-40"
-                    } absolute top-0 ltr:left-full rtl:right-full ltr:pl-4 rtl:pr-4 text-base leading-6 md:mt-3 mt-1 transition duration-150 w-full`}
+                    className={` ${stepNumber >= i
+                      ? " text-slate-900 dark:text-slate-300"
+                      : "text-slate-500 dark:text-slate-300 dark:text-opacity-40"
+                      } absolute top-0 ltr:left-full rtl:right-full ltr:pl-4 rtl:pr-4 text-base leading-6 md:mt-3 mt-1 transition duration-150 w-full`}
                   >
                     <span className="w-max block">{item.title}</span>
                   </div>
@@ -297,7 +294,7 @@ function AddStaff() {
                       register={register}
                     />
                     <InputGroup
-                      label="Ulternate contact Number"
+                      label="Alternate contact Number"
                       type="tel"
                       prepend="IN (+91)"
                       placeholder="Phone Number"
@@ -826,9 +823,8 @@ function AddStaff() {
               )}
 
               <div
-                className={`${
-                  stepNumber > 0 ? "flex justify-between" : " text-right"
-                } mt-10`}
+                className={`${stepNumber > 0 ? "flex justify-between" : " text-right"
+                  } mt-10`}
               >
                 {stepNumber !== 0 && (
                   <Button
