@@ -29,19 +29,19 @@ export default function Employment() {
   const employementPostData = useSelector((state) => state.employment.newData);
 
   useEffect(() => {
-    console.log("empty dependency");
+    // console.log("empty dependency");
     dispatch(getemploymentData(token));
   }, []);
 
   useEffect(() => {
     if (employementData) setData(employementData);
-    console.log("one added dependency");
+    // console.log("one added dependency");
   }, [employementData]);
 
   useEffect(() => {
     if (employementUpdateData || employementPostData)
       dispatch(getemploymentData(token));
-    console.log("In update or add dependency");
+    // console.log("In update or add dependency");
   }, [employementUpdateData, employementPostData]);
 
   function handleChange(id) {

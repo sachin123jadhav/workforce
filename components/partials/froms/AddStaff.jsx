@@ -16,6 +16,12 @@ import Fileinput from "@/components/ui/Fileinput";
 import EducationFormRepeater from "./EducationFormRepeater";
 import ExperienceFormRepeater from "./ExperienceFormRepeater";
 import Switch from "@/components/ui/Switch";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { getemploymentData } from "@/store/employment";
+import EditTaskModal from "../app/kanban/EditTask";
+import { getDesignationData } from "@/store/designation";
+import { getdepartmentData } from "@/store/department";
 
 const steps = [
   {
@@ -111,6 +117,62 @@ function AddStaff() {
     default:
       currentStepSchema = stepSchema;
   }
+
+  const [employdata, setEmploydata] = useState([]);
+  const [desigdata, setDesigdata] = useState([]);
+  const [departdata, setDepartdata] = useState([]);
+  const dispatch = useDispatch();
+
+  const token = useSelector((state) => state.auth.isAuth.token);
+  const departData = useSelector((state) => state.department.departmentData);
+  const employementData = useSelector(
+    (state) => state.employment.employmentData
+  );
+  const designationData = useSelector(
+    (state) => state.designation.designationData
+  );
+
+  useEffect(() => {
+    // console.log("empty dependency");
+    dispatch(getemploymentData(token));
+    dispatch(getDesignationData(token));
+    dispatch(getdepartmentData(token));
+  }, []);
+
+  useEffect(() => {
+    if (employementData) {
+      let data = [];
+      for (const el of employementData) {
+        data.push({ label: el.employment_type, value: el.id });
+      }
+      setEmploydata(data);
+    }
+  }, [employementData]);
+
+  useEffect(() => {
+    if (designationData) {
+      let data = [];
+      for (const el of designationData) {
+        data.push({ label: el.designation, value: el.id });
+      }
+      setDesigdata(data);
+    }
+  }, [designationData]);
+
+  useEffect(() => {
+    if (departData) {
+      let data = [];
+      for (const el of departData) {
+        data.push({ label: el.department, value: el.id });
+      }
+      setDepartdata(data);
+    }
+  }, [departData]);
+
+  function employeeType(params) {
+    console.log(params.target.value);
+  }
+
   useEffect(() => {
     // console.log("step number changed");
   }, [stepNumber]);
@@ -211,10 +273,11 @@ function AddStaff() {
               {steps.map((item, i) => (
                 <div className="relative z-[1] flex-1 last:flex-none" key={i}>
                   <div
-                    className={`   ${stepNumber >= i
-                      ? "bg-blue-800 text-white ring-slate-900 dark:bg-slate-900 dark:ring-slate-700  dark:ring-offset-slate-500 ring-offset-2"
-                      : "bg-white ring-slate-900 ring-opacity-70  text-slate-900 dark:text-slate-300 text-opacity-70 dark:bg-slate-700 dark:ring-slate-700"
-                      } 
+                    className={`   ${
+                      stepNumber >= i
+                        ? "bg-blue-800 text-white ring-slate-900 dark:bg-slate-900 dark:ring-slate-700  dark:ring-offset-slate-500 ring-offset-2"
+                        : "bg-white ring-slate-900 ring-opacity-70  text-slate-900 dark:text-slate-300 text-opacity-70 dark:bg-slate-700 dark:ring-slate-700"
+                    } 
         transition duration-150 icon-box md:h-12 md:w-12 h-8 w-8 rounded-full flex flex-col items-center justify-center relative z-[66] ring-1 md:text-lg text-base font-medium
         `}
                   >
@@ -228,16 +291,18 @@ function AddStaff() {
                   </div>
 
                   <div
-                    className={`bg-gre ${stepNumber >= i
-                      ? "bg-blue-800 dark:bg-slate-900"
-                      : "bg-[#E0EAFF] dark:bg-slate-600"
-                      } absolute top-0 left-1/2 -translate-x-1/2 h-full w-[2px]`}
+                    className={`bg-gre ${
+                      stepNumber >= i
+                        ? "bg-blue-800 dark:bg-slate-900"
+                        : "bg-[#E0EAFF] dark:bg-slate-600"
+                    } absolute top-0 left-1/2 -translate-x-1/2 h-full w-[2px]`}
                   ></div>
                   <div
-                    className={` ${stepNumber >= i
-                      ? " text-slate-900 dark:text-slate-300"
-                      : "text-slate-500 dark:text-slate-300 dark:text-opacity-40"
-                      } absolute top-0 ltr:left-full rtl:right-full ltr:pl-4 rtl:pr-4 text-base leading-6 md:mt-3 mt-1 transition duration-150 w-full`}
+                    className={` ${
+                      stepNumber >= i
+                        ? " text-slate-900 dark:text-slate-300"
+                        : "text-slate-500 dark:text-slate-300 dark:text-opacity-40"
+                    } absolute top-0 ltr:left-full rtl:right-full ltr:pl-4 rtl:pr-4 text-base leading-6 md:mt-3 mt-1 transition duration-150 w-full`}
                   >
                     <span className="w-max block">{item.title}</span>
                   </div>
@@ -326,26 +391,30 @@ function AddStaff() {
                     />
 
                     <Select
-                      options={[
-                        "Company Admin",
-                        "Board of Director",
-                        "HR",
-                        "Employee",
-                      ]}
+                      options={desigdata}
+                      // options={[
+                      //   "Company Admin",
+                      //   "Board of Director",
+                      //   "HR",
+                      //   "Employee",
+                      // ]}
                       label="Designation"
                     />
 
                     <Select
-                      options={[
-                        "Department 1",
-                        "Department 2",
-                        "Department 3",
-                        "Department 4",
-                      ]}
+                      options={departdata}
+                      // options={[
+                      //   "Department 1",
+                      //   "Department 2",
+                      //   "Department 3",
+                      //   "Department 4",
+                      // ]}
                       label="Department"
                     />
                     <Select
-                      options={["Employment type 1", "Employment type 2"]}
+                      // options={["Employment type 1", "Employment type 2"]}
+                      options={employdata}
+                      onChange={employeeType}
                       label="Employment"
                     />
                     <Select
@@ -823,8 +892,9 @@ function AddStaff() {
               )}
 
               <div
-                className={`${stepNumber > 0 ? "flex justify-between" : " text-right"
-                  } mt-10`}
+                className={`${
+                  stepNumber > 0 ? "flex justify-between" : " text-right"
+                } mt-10`}
               >
                 {stepNumber !== 0 && (
                   <Button
