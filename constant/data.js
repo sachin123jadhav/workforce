@@ -108,15 +108,15 @@ export const menuItems = [
     child: [
       {
         childtitle: "Employee",
-        childlink: "view",
+        childlink: "employment",
       },
       {
         childtitle: "Department",
-        childlink: "applications",
+        childlink: "department",
       },
       {
         childtitle: "Designation",
-        childlink: "view",
+        childlink: "designation",
       },
       {
         childtitle: "Exit Details",
