@@ -141,31 +141,31 @@ function AddStaff() {
 
   useEffect(() => {
     if (employementData) {
-      let data = [];
-      for (const el of employementData) {
-        data.push({ label: el.employment_type, value: el.id });
-      }
-      setEmploydata(data);
+      // let data = [];
+      // for (const el of employementData) {
+      //   data.push({ label: el.employment_type, value: el.id });
+      // }
+      // setEmploydata(data);
     }
   }, [employementData]);
 
   useEffect(() => {
     if (designationData) {
       let data = [];
-      for (const el of designationData) {
-        data.push({ label: el.designation, value: el.id });
-      }
-      setDesigdata(data);
+      // for (const el of designationData) {
+      //   data.push({ label: el.designation, value: el.id });
+      // }
+      // setDesigdata(data);
     }
   }, [designationData]);
 
   useEffect(() => {
     if (departData) {
       let data = [];
-      for (const el of departData) {
-        data.push({ label: el.department, value: el.id });
-      }
-      setDepartdata(data);
+      // for (const el of departData) {
+      //   data.push({ label: el.department, value: el.id });
+      // }
+      // setDepartdata(data);
     }
   }, [departData]);
 
