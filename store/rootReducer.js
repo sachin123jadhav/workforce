@@ -21,7 +21,7 @@ import designation from "./designation";
 import department from "./department";
 import employment from "./employment";
 import userrole from "./userrole";
-// import companyprofile from "./companyprofile";
+import branch from "./branch";
 // import mapdata from "./mapdata";
 
 const rootReducer = combineReducers({
@@ -33,6 +33,7 @@ const rootReducer = combineReducers({
   department,
   employment,
   userrole,
+  branch,
   // companyprofile,
   // mapdata,
 });

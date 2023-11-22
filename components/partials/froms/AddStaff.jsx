@@ -23,6 +23,7 @@ import EditTaskModal from "../app/kanban/EditTask";
 import { getDesignationData } from "@/store/designation";
 import { getdepartmentData } from "@/store/department";
 import { getuserroleData } from "@/store/userrole";
+import { getbranchData } from "@/store/branch";
 
 const steps = [
   {
@@ -67,6 +68,7 @@ let stepSchema = yup.object().shape({
   empid: yup.string().required(" Emp ID is required"),
   address: yup.string().required("Address is required"),
   pmaddress: yup.string().required("Permanent Address is required"),
+  password: yup.string().required("Password is required"),
   phone: yup.string().required("Phone number is required"),
   //.matches(/^[0-9]{12}$/, "Phone number is not valid"),
 });
@@ -128,6 +130,7 @@ function AddStaff() {
   const [desigdata, setDesigdata] = useState([]);
   const [departdata, setDepartdata] = useState([]);
   const [userRole, setUserRole] = useState([]);
+  const [branch, setBranch] = useState([]);
   const dispatch = useDispatch();
 
   const token = useSelector((state) => state.auth.isAuth.token);
@@ -139,6 +142,7 @@ function AddStaff() {
     (state) => state.designation.designationData
   );
   const userroleData = useSelector((state) => state.userrole.userRole);
+  const branchData = useSelector((state) => state.branch.branchData);
 
   useEffect(() => {
     // console.log("empty dependency");
@@ -146,6 +150,7 @@ function AddStaff() {
     dispatch(getDesignationData(token));
     dispatch(getdepartmentData(token));
     dispatch(getuserroleData(token));
+    dispatch(getbranchData(token));
   }, []);
 
   useEffect(() => {
@@ -191,6 +196,17 @@ function AddStaff() {
       setUserRole(data);
     }
   }, [userroleData]);
+
+  useEffect(() => {
+    if (branchData) {
+      console.log("branchData", branchData);
+      let data = [];
+      for (const el of branchData["data"]) {
+        data.push({ label: el.branch_name, value: el.id });
+      }
+      setBranch(data);
+    }
+  }, [branchData]);
 
   function employeeType(params) {
     console.log(params.target.value);
@@ -485,10 +501,12 @@ function AddStaff() {
                       name="password"
                       //required
                       register={register}
+                      error={errors.password}
                     />
 
                     <Select
-                      options={["Branch 1", "Branch 2", "Branch 3", "Branch 4"]}
+                      options={branch}
+                      // options={["Branch 1", "Branch 2", "Branch 3", "Branch 4"]}
                       label="Branch"
                     />
                     <div className="file-input">
