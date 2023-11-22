@@ -96,9 +96,9 @@ export default function AddBrnach() {
       });
   }
 
-  useEffect(() => {
-    if (center) console.log("center", center);
-  }, [center]);
+  // useEffect(() => {
+  //   if (center) console.log("center", center);
+  // }, [center]);
 
   return (
     <>

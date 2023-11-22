@@ -33,7 +33,10 @@ export default function CompanyProfilePage() {
   }, []);
 
   useEffect(() => {
-    if (comProfileData) setData(comProfileData);
+    if (comProfileData) {
+      console.log("comProfileData", comProfileData);
+      setData(comProfileData["data"]);
+    }
     console.log("one added dependency");
   }, [comProfileData]);
 
@@ -115,7 +118,6 @@ export default function CompanyProfilePage() {
             <tbody>
               {data?.map((uData) => {
                 no = no + 1;
-                // console.log(uData)
                 return (
                   <tr
                     key={uData.id}
@@ -128,11 +130,7 @@ export default function CompanyProfilePage() {
                     <td className="px-6 py-4">
                       {uData.country_code + " " + uData.branch_number}
                     </td>
-                    {/* <td className="px-6 py-4">{uData.branch_number}</td>
-                    <td className="px-6 py-4">{uData.latitude}</td>
-                    <td className="px-6 py-4">{uData.longitude}</td>
-                    <td className="px-6 py-4">{uData.radius}</td>
-                    <td className="px-6 py-4">{uData.location}</td> */}
+
                     <td className="px-6 py-4">
                       {uData.active ? (
                         <AiOutlineCheckCircle />
