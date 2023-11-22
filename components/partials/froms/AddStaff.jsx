@@ -22,6 +22,7 @@ import { getemploymentData } from "@/store/employment";
 import EditTaskModal from "../app/kanban/EditTask";
 import { getDesignationData } from "@/store/designation";
 import { getdepartmentData } from "@/store/department";
+import { getuserroleData } from "@/store/userrole";
 
 const steps = [
   {
@@ -56,12 +57,12 @@ const steps = [
 ];
 
 let stepSchema = yup.object().shape({
-  //   cmnerror: yup.string().required(" This Field is required"),
-  //   username: yup.string().required(" User name is required"),
-  //   empid: yup.string().required(" Emp ID is required"),
-  //   fullname: yup.string().required("Full name is required"),
-  //   email: yup.string().email("Email is not valid").required("Email is required"),
-  //   phone: yup.string().required("Phone number is required"),
+    cmnerror: yup.string().required(" This Field is required"),
+    username: yup.string().required(" User name is required"),
+    empid: yup.string().required(" Emp ID is required"),
+    fullname: yup.string().required("Full name is required"),
+    email: yup.string().email("Email is not valid").required("Email is required"),
+    phone: yup.string().required("Phone number is required"),
   //.matches(/^[0-9]{12}$/, "Phone number is not valid"),
 });
 
@@ -121,6 +122,7 @@ function AddStaff() {
   const [employdata, setEmploydata] = useState([]);
   const [desigdata, setDesigdata] = useState([]);
   const [departdata, setDepartdata] = useState([]);
+  const [userRole, setUserRole] = useState([]);
   const dispatch = useDispatch();
 
   const token = useSelector((state) => state.auth.isAuth.token);
@@ -131,43 +133,59 @@ function AddStaff() {
   const designationData = useSelector(
     (state) => state.designation.designationData
   );
+  const userroleData = useSelector((state) => state.userrole.userRole);
 
   useEffect(() => {
     // console.log("empty dependency");
     dispatch(getemploymentData(token));
     dispatch(getDesignationData(token));
     dispatch(getdepartmentData(token));
+    dispatch(getuserroleData(token));
   }, []);
 
   useEffect(() => {
     if (employementData) {
-      // let data = [];
-      // for (const el of employementData) {
-      //   data.push({ label: el.employment_type, value: el.id });
-      // }
-      // setEmploydata(data);
+      // console.log("employementData", employementData);
+      let data = [];
+      for (const el of employementData) {
+        data.push({ label: el.employment_type, value: el.id });
+      }
+      setEmploydata(data);
     }
   }, [employementData]);
 
   useEffect(() => {
     if (designationData) {
+      // console.log("designationData", designationData);
       let data = [];
-      // for (const el of designationData) {
-      //   data.push({ label: el.designation, value: el.id });
-      // }
-      // setDesigdata(data);
+      for (const el of designationData) {
+        data.push({ label: el.designation, value: el.id });
+      }
+      setDesigdata(data);
     }
   }, [designationData]);
 
   useEffect(() => {
     if (departData) {
+      // console.log("departData", departData);
       let data = [];
-      // for (const el of departData) {
-      //   data.push({ label: el.department, value: el.id });
-      // }
-      // setDepartdata(data);
+      for (const el of departData) {
+        data.push({ label: el.department, value: el.id });
+      }
+      setDepartdata(data);
     }
   }, [departData]);
+
+  useEffect(() => {
+    if (userroleData) {
+      // console.log("userroleData", userroleData);
+      let data = [];
+      for (const el of userroleData["data"]) {
+        data.push({ label: el.user_role, value: el.id });
+      }
+      setUserRole(data);
+    }
+  }, [userroleData]);
 
   function employeeType(params) {
     console.log(params.target.value);
@@ -418,12 +436,13 @@ function AddStaff() {
                       label="Employment"
                     />
                     <Select
-                      options={[
-                        "User Role 1",
-                        "User Role 2",
-                        "User Role 3",
-                        "User Role 4",
-                      ]}
+                      options={userRole}
+                      // options={[
+                      //   "User Role 1",
+                      //   "User Role 2",
+                      //   "User Role 3",
+                      //   "User Role 4",
+                      // ]}
                       label="User Role"
                     />
 

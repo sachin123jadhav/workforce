@@ -12,7 +12,6 @@
 // });
 // export default rootReducer;
 
-
 import { combineReducers } from "@reduxjs/toolkit";
 import layout from "./layoutReducer";
 import auth from "@/components/partials/auth/store";
@@ -21,6 +20,7 @@ import User from "./Profile";
 import designation from "./designation";
 import department from "./department";
 import employment from "./employment";
+import userrole from "./userrole";
 // import companyprofile from "./companyprofile";
 // import mapdata from "./mapdata";
 
@@ -32,6 +32,7 @@ const rootReducer = combineReducers({
   designation,
   department,
   employment,
+  userrole,
   // companyprofile,
   // mapdata,
 });
