@@ -57,12 +57,17 @@ const steps = [
 ];
 
 let stepSchema = yup.object().shape({
-    cmnerror: yup.string().required(" This Field is required"),
-    username: yup.string().required(" User name is required"),
-    empid: yup.string().required(" Emp ID is required"),
-    fullname: yup.string().required("Full name is required"),
-    email: yup.string().email("Email is not valid").required("Email is required"),
-    phone: yup.string().required("Phone number is required"),
+  firstname: yup.string().required(" First Name is Required"),
+  middlename: yup.string().required(" Middle Name is Required"),
+  lastname: yup.string().required(" Last Name is Required"),
+  // cmnerror: yup.string().required(" This Field is required"),
+  email: yup.string().email("Email is not valid").required("Email is required"),
+  phonenumber: yup.string().required(" Phone Number is Required"),
+  altphonenumber: yup.string().required(" Alternate Number is required"),
+  empid: yup.string().required(" Emp ID is required"),
+  address: yup.string().required("Address is required"),
+  pmaddress: yup.string().required("Permanent Address is required"),
+  phone: yup.string().required("Phone number is required"),
   //.matches(/^[0-9]{12}$/, "Phone number is not valid"),
 });
 
@@ -207,6 +212,7 @@ function AddStaff() {
   });
 
   const onSubmit = (data) => {
+    console.log("data", data);
     // next step until last step . if last step then submit form
     let totalSteps = steps.length;
     const isLastStep = stepNumber === totalSteps - 1;
@@ -341,6 +347,7 @@ function AddStaff() {
                       name="firstname"
                       //required
                       register={register}
+                      error={errors.firstname}
                     />
                     <Textinput
                       label="Middle name"
@@ -349,6 +356,7 @@ function AddStaff() {
                       name="middlename"
                       //required
                       register={register}
+                      error={errors.middlename}
                     />
 
                     <Textinput
@@ -358,6 +366,7 @@ function AddStaff() {
                       name="fullname"
                       //required
                       register={register}
+                      error={errors.lastname}
                     />
                     <Textinput
                       label="Email"
@@ -366,6 +375,7 @@ function AddStaff() {
                       name="email"
                       //required
                       register={register}
+                      error={errors.email}
                     />
                     <InputGroup
                       label="Phone Number"
@@ -375,6 +385,7 @@ function AddStaff() {
                       name="phone"
                       //required
                       register={register}
+                      // error={errors.phonenumber}
                     />
                     <InputGroup
                       label="Alternate contact Number"
@@ -383,6 +394,7 @@ function AddStaff() {
                       placeholder="Phone Number"
                       name="phone"
                       register={register}
+                      // error={errors.altphonenumber}
                     />
                     <div className="floating-label date-input">
                       <Flatpickr
@@ -406,6 +418,7 @@ function AddStaff() {
                       name="user_id"
                       //required
                       register={register}
+                      // error={errors.empid}
                     />
 
                     <Select
@@ -453,6 +466,7 @@ function AddStaff() {
                       name="address"
                       //required
                       register={register}
+                      error={errors.address}
                     />
                     <Textinput
                       label="Permenant Address"
@@ -461,6 +475,7 @@ function AddStaff() {
                       name="permaddress"
                       //required
                       register={register}
+                      error={errors.pmaddress}
                     />
 
                     <Textinput
