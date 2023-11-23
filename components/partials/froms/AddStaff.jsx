@@ -353,187 +353,187 @@ function AddStaff() {
 
           <div className="conten-box lg:col-span-9 col-span-12">
             {/* {stepNumber === 0 && ( */}
-              <form onSubmit={handleSubmit(onSubmit)}>
-                <div>
-                  <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5">
-                    <Textinput
-                      label="First Name"
-                      type="text"
-                      placeholder=""
-                      name="firstname"
-                      //required
-                      register={register}
-                      error={errors.firstname}
-                    />
-                    <Textinput
-                      label="Middle name"
-                      type="text"
-                      placeholder=""
-                      name="middlename"
-                      //required
-                      register={register}
-                      error={errors.middlename}
-                    />
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <div>
+                <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5">
+                  <Textinput
+                    label="First Name"
+                    type="text"
+                    placeholder=""
+                    name="firstname"
+                    //required
+                    register={register}
+                    error={errors.firstname}
+                  />
+                  <Textinput
+                    label="Middle name"
+                    type="text"
+                    placeholder=""
+                    name="middlename"
+                    //required
+                    register={register}
+                    error={errors.middlename}
+                  />
 
-                    <Textinput
-                      label="Last Name"
-                      type="text"
-                      placeholder="Full name"
-                      name="lastname"
-                      //required
-                      register={register}
-                      error={errors.lastname}
+                  <Textinput
+                    label="Last Name"
+                    type="text"
+                    placeholder="Full name"
+                    name="lastname"
+                    //required
+                    register={register}
+                    error={errors.lastname}
+                  />
+                  <Textinput
+                    label="Email"
+                    type="email"
+                    placeholder="Type your email"
+                    name="email"
+                    //required
+                    register={register}
+                    error={errors.email}
+                  />
+                  <InputGroup
+                    label="Phone Number"
+                    type="tel"
+                    prepend="IN (+91)"
+                    placeholder="Phone Number"
+                    name="phone"
+                    //required
+                    register={register}
+                    // error={errors.phonenumber}
+                  />
+                  <InputGroup
+                    label="Alternate contact Number"
+                    type="tel"
+                    prepend="IN (+91)"
+                    placeholder="Phone Number"
+                    name="phone"
+                    register={register}
+                    // error={errors.altphonenumber}
+                  />
+                  <div className="floating-label date-input">
+                    <Flatpickr
+                      value={picker}
+                      id="hf-picker"
+                      className="form-control py-2"
+                      onChange={(date) => setPicker(date)}
+                      options={{
+                        altInput: true,
+                        altFormat: "F j, Y",
+                        dateFormat: "Y-m-d",
+                      }}
                     />
-                    <Textinput
-                      label="Email"
-                      type="email"
-                      placeholder="Type your email"
-                      name="email"
-                      //required
-                      register={register}
-                      error={errors.email}
-                    />
-                    <InputGroup
-                      label="Phone Number"
-                      type="tel"
-                      prepend="IN (+91)"
-                      placeholder="Phone Number"
-                      name="phone"
-                      //required
-                      register={register}
-                      // error={errors.phonenumber}
-                    />
-                    <InputGroup
-                      label="Alternate contact Number"
-                      type="tel"
-                      prepend="IN (+91)"
-                      placeholder="Phone Number"
-                      name="phone"
-                      register={register}
-                      // error={errors.altphonenumber}
-                    />
-                    <div className="floating-label date-input">
-                      <Flatpickr
-                        value={picker}
-                        id="hf-picker"
-                        className="form-control py-2"
-                        onChange={(date) => setPicker(date)}
-                        options={{
-                          altInput: true,
-                          altFormat: "F j, Y",
-                          dateFormat: "Y-m-d",
-                        }}
-                      />
-                      <label>Date of Birth</label>
-                    </div>
-
-                    <Textinput
-                      label="Employee ID"
-                      type="number"
-                      placeholder=""
-                      name="user_id"
-                      //required
-                      register={register}
-                      // error={errors.empid}
-                    />
-
-                    <Select
-                      options={desigdata}
-                      // options={[
-                      //   "Company Admin",
-                      //   "Board of Director",
-                      //   "HR",
-                      //   "Employee",
-                      // ]}
-                      label="Designation"
-                    />
-
-                    <Select
-                      options={departdata}
-                      // options={[
-                      //   "Department 1",
-                      //   "Department 2",
-                      //   "Department 3",
-                      //   "Department 4",
-                      // ]}
-                      label="Department"
-                    />
-                    <Select
-                      // options={["Employment type 1", "Employment type 2"]}
-                      options={employdata}
-                      onChange={employeeType}
-                      label="Employment"
-                    />
-                    <Select
-                      options={userRole}
-                      // options={[
-                      //   "User Role 1",
-                      //   "User Role 2",
-                      //   "User Role 3",
-                      //   "User Role 4",
-                      // ]}
-                      label="User Role"
-                    />
-
-                    <Textinput
-                      label="Address"
-                      type="text"
-                      placeholder="Full name"
-                      name="address"
-                      //required
-                      register={register}
-                      error={errors.address}
-                    />
-                    <Textinput
-                      label="Permenant Address"
-                      type="text"
-                      placeholder="Permenant Address"
-                      name="permaddress"
-                      //required
-                      register={register}
-                      // error={errors.pmaddress}
-                    />
-
-                    <Textinput
-                      label="Password"
-                      type="password"
-                      placeholder=""
-                      name="password"
-                      //required
-                      register={register}
-                      error={errors.password}
-                    />
-
-                    <Select
-                      options={branch}
-                      // options={["Branch 1", "Branch 2", "Branch 3", "Branch 4"]}
-                      label="Branch"
-                    />
-                    <div className="file-input">
-                      <p className="file-label">Profile Image</p>
-                      <Fileinput
-                        name="basic"
-                        selectedFile={selectedFile2}
-                        onChange={handleFileChange2}
-                        preview
-                      />
-                    </div>
-                    <div className="file-input">
-                      <p className="file-label">Face match images</p>
-                      <Fileinput
-                        name="basic"
-                        selectedFiles={selectedFiles2}
-                        onChange={handleFileChangeMultiple2}
-                        multiple
-                        preview
-                      />
-                    </div>
+                    <label>Date of Birth</label>
                   </div>
-                </div>{" "}
-                <div className="ltr:text-right rtl:text-left">
-                  <button className="btn btn-dark  text-center">Submit</button>
+
+                  <Textinput
+                    label="Employee ID"
+                    type="number"
+                    placeholder=""
+                    name="user_id"
+                    //required
+                    register={register}
+                    // error={errors.empid}
+                  />
+
+                  <Select
+                    options={desigdata}
+                    // options={[
+                    //   "Company Admin",
+                    //   "Board of Director",
+                    //   "HR",
+                    //   "Employee",
+                    // ]}
+                    label="Designation"
+                  />
+
+                  <Select
+                    options={departdata}
+                    // options={[
+                    //   "Department 1",
+                    //   "Department 2",
+                    //   "Department 3",
+                    //   "Department 4",
+                    // ]}
+                    label="Department"
+                  />
+                  <Select
+                    // options={["Employment type 1", "Employment type 2"]}
+                    options={employdata}
+                    onChange={employeeType}
+                    label="Employment"
+                  />
+                  <Select
+                    options={userRole}
+                    // options={[
+                    //   "User Role 1",
+                    //   "User Role 2",
+                    //   "User Role 3",
+                    //   "User Role 4",
+                    // ]}
+                    label="User Role"
+                  />
+
+                  <Textinput
+                    label="Address"
+                    type="text"
+                    placeholder="Full name"
+                    name="address"
+                    //required
+                    register={register}
+                    error={errors.address}
+                  />
+                  <Textinput
+                    label="Permenant Address"
+                    type="text"
+                    placeholder="Permenant Address"
+                    name="permaddress"
+                    //required
+                    register={register}
+                    // error={errors.pmaddress}
+                  />
+
+                  <Textinput
+                    label="Password"
+                    type="password"
+                    placeholder=""
+                    name="password"
+                    //required
+                    register={register}
+                    error={errors.password}
+                  />
+
+                  <Select
+                    options={branch}
+                    // options={["Branch 1", "Branch 2", "Branch 3", "Branch 4"]}
+                    label="Branch"
+                  />
+                  <div className="file-input">
+                    <p className="file-label">Profile Image</p>
+                    <Fileinput
+                      name="basic"
+                      selectedFile={selectedFile2}
+                      onChange={handleFileChange2}
+                      preview
+                    />
+                  </div>
+                  <div className="file-input">
+                    <p className="file-label">Face match images</p>
+                    <Fileinput
+                      name="basic"
+                      selectedFiles={selectedFiles2}
+                      onChange={handleFileChangeMultiple2}
+                      multiple
+                      preview
+                    />
+                  </div>
                 </div>
-                {/* <Button
+              </div>{" "}
+              <div className="ltr:text-right rtl:text-left">
+                <button className="btn btn-dark  text-center">Submit</button>
+              </div>
+              {/* <Button
                   text={"submit"}
                   // text={stepNumber !== steps.length - 1 ? "next" : "submit"}
                   className="btn-dark bg-blue-700"
@@ -542,7 +542,7 @@ function AddStaff() {
                   iconPosition="right"
                   onClick={handleNext}
                 /> */}
-              </form>
+            </form>
             {/* )} */}
 
             {stepNumber === 1 && (
