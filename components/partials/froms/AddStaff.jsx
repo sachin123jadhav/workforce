@@ -127,6 +127,7 @@ function AddStaff() {
   });
 
   const onSubmit = (data) => {
+    console.log("on submit function");
     // next step until last step . if last step then submit form
     let totalSteps = steps.length;
     const isLastStep = stepNumber === totalSteps - 1;
