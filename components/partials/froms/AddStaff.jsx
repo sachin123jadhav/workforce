@@ -131,6 +131,15 @@ function AddStaff() {
   const [departdata, setDepartdata] = useState([]);
   const [userRole, setUserRole] = useState([]);
   const [branch, setBranch] = useState([]);
+  const [selectedFile2, setSelectedFile2] = useState(null);
+  const [faceImage, setFaceImage] = useState(null);
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedFileforPan, setSelectedFileforPan] = useState(null);
+  const [selectedFileforPassbook, setSelectedFileforPassbook] = useState(null);
+  const [selectedFileforMarksheet, setSelectedFileforMarksheet] =
+    useState(null);
+  // const [selectedFiles2, setSelectedFiles2] = useState([]);
+
   const dispatch = useDispatch();
 
   const token = useSelector((state) => state.auth.isAuth.token);
@@ -222,22 +231,26 @@ function AddStaff() {
     handleSubmit,
     watch,
   } = useForm({
-    resolver: yupResolver(currentStepSchema),
+    // resolver: yupResolver(currentStepSchema),
     // keep watch on all fields
     mode: "all",
   });
 
   const onSubmit = (data) => {
+    data["bdata"] = picker;
+    data["profile"] = selectedFile2;
+    data["faceMatch"] = faceImage;
+    // data["face"] = selectedFiles2;
     console.log("onSubmit function");
     console.log("data", data);
-    // next step until last step . if last step then submit form
-    let totalSteps = steps.length;
-    const isLastStep = stepNumber === totalSteps - 1;
-    if (isLastStep) {
-      //console.log(data);
-    } else {
-      setStepNumber(stepNumber + 1);
-    }
+    // // next step until last step . if last step then submit form
+    // let totalSteps = steps.length;
+    // const isLastStep = stepNumber === totalSteps - 1;
+    // if (isLastStep) {
+    //   //console.log(data);
+    // } else {
+    //   setStepNumber(stepNumber + 1);
+    // }
   };
 
   const handlePrev = () => {
@@ -261,16 +274,11 @@ function AddStaff() {
     setValue2(e.target.value);
   };
 
-  const [selectedFile2, setSelectedFile2] = useState(null);
-  const [selectedFile, setSelectedFile] = useState(null);
-  const [selectedFileforPan, setSelectedFileforPan] = useState(null);
-  const [selectedFileforPassbook, setSelectedFileforPassbook] = useState(null);
-  const [selectedFileforMarksheet, setSelectedFileforMarksheet] =
-    useState(null);
-  const [selectedFiles2, setSelectedFiles2] = useState([]);
-
   const handleFileChange2 = (e) => {
     setSelectedFile2(e.target.files[0]);
+  };
+  const faceImageChange = (e) => {
+    setFaceImage(e.target.files[0]);
   };
   const handleFileChange = (e) => {
     setSelectedFile(e.target.files[0]);
@@ -287,11 +295,11 @@ function AddStaff() {
     setSelectedFileforMarksheet(e.target.files[0]);
   };
 
-  const handleFileChangeMultiple2 = (e) => {
-    const files = e.target.files;
-    const filesArray = Array.from(files).map((file) => file);
-    setSelectedFiles2(filesArray);
-  };
+  // const handleFileChangeMultiple2 = (e) => {
+  //   const files = e.target.files;
+  //   const filesArray = Array.from(files).map((file) => file);
+  //   setSelectedFiles2(filesArray);
+  // };
 
   const [checked, setChecked] = useState(true);
   const [checked1, setChecked1] = useState(true);
@@ -360,7 +368,7 @@ function AddStaff() {
                     <Textinput
                       label="First Name"
                       type="text"
-                      placeholder=""
+                      placeholder="NAME"
                       name="firstname"
                       //required
                       register={register}
@@ -409,12 +417,14 @@ function AddStaff() {
                       type="tel"
                       prepend="IN (+91)"
                       placeholder="Phone Number"
-                      name="phone"
+                      name="aphone"
                       register={register}
                       // error={errors.altphonenumber}
                     />
                     <div className="floating-label date-input">
                       <Flatpickr
+                        // name="bdate"
+                        // register={register}
                         value={picker}
                         id="hf-picker"
                         className="form-control py-2"
@@ -432,13 +442,15 @@ function AddStaff() {
                       label="Employee ID"
                       type="number"
                       placeholder=""
-                      name="user_id"
+                      name="emp_id"
                       //required
                       register={register}
                       // error={errors.empid}
                     />
 
                     <Select
+                      name="designation"
+                      register={register}
                       options={desigdata}
                       // options={[
                       //   "Company Admin",
@@ -450,6 +462,8 @@ function AddStaff() {
                     />
 
                     <Select
+                      name="department"
+                      register={register}
                       options={departdata}
                       // options={[
                       //   "Department 1",
@@ -460,12 +474,16 @@ function AddStaff() {
                       label="Department"
                     />
                     <Select
+                      name="employment"
+                      register={register}
                       // options={["Employment type 1", "Employment type 2"]}
                       options={employdata}
                       onChange={employeeType}
                       label="Employment"
                     />
                     <Select
+                      name="userrole"
+                      register={register}
                       options={userRole}
                       // options={[
                       //   "User Role 1",
@@ -479,7 +497,7 @@ function AddStaff() {
                     <Textinput
                       label="Address"
                       type="text"
-                      placeholder="Full name"
+                      placeholder="Address"
                       name="address"
                       //required
                       register={register}
@@ -506,6 +524,8 @@ function AddStaff() {
                     />
 
                     <Select
+                      name="branch"
+                      register={register}
                       options={branch}
                       // options={["Branch 1", "Branch 2", "Branch 3", "Branch 4"]}
                       label="Branch"
@@ -523,12 +543,21 @@ function AddStaff() {
                       <p className="file-label">Face match images</p>
                       <Fileinput
                         name="basic"
+                        selectedFile={faceImage}
+                        onChange={faceImageChange}
+                        preview
+                      />
+                    </div>
+                    {/* <div className="file-input">
+                      <p className="file-label">Face match images</p>
+                      <Fileinput
+                        name="basic"
                         selectedFiles={selectedFiles2}
                         onChange={handleFileChangeMultiple2}
                         multiple
                         preview
                       />
-                    </div>
+                    </div> */}
                   </div>
                 </div>
                 <Button
