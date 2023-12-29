@@ -1,9 +1,9 @@
 import React from 'react'
 
-function page() {
+function Regulerization() {
   return (
     <div>This is Regulerization page</div>
   )
 }
 
-export default page
+export default Regulerization

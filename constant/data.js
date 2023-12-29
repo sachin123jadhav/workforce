@@ -13,6 +13,33 @@ export const menuItems = [
   },
 
   {
+    title: "Event",
+    icon: "heroicons:qr-code-solid",
+    link: "/event",
+    isHide: true,
+  },
+  {
+    title: "Holiday",
+    icon: "heroicons:qr-code-solid",
+    link: "/holiday",
+    isHide: true,
+  },
+  {
+    title: "QuickLink",
+    icon: "heroicons:qr-code-solid",
+    link: "/quicklink",
+    isHide: true,
+  },
+  {
+    title: "Announcement",
+    icon: "heroicons:qr-code-solid",
+    link: "/announcement",
+    isHide: true,
+  },
+
+
+
+  {
     title: "Services",
     icon: "heroicons:qr-code-solid",
     link: "custompage",
@@ -26,14 +53,17 @@ export const menuItems = [
     child: [
       {
         childtitle: "Regulerization",
-        childlink: "/regulerization",
+        childlink: "regulerization",
       },
       {
         childtitle: "Reports",
-        childlink: "/reports",
+        childlink: "reports",
       },
     ],
   },
+  
+
+
   {
     title: "Outstation",
     icon: "heroicons:qr-code-solid",
@@ -53,11 +83,36 @@ export const menuItems = [
     isHide: true,
   },
   {
+    title: "Company",
+    icon: "heroicons:calendar",
+    isOpen: true,
+    isHide: true,
+    child: [
+      {
+        childtitle: "Company Profile",
+        childlink: "companyprofile",
+      },
+      {
+        childtitle: "Designation",
+        childlink: "designation",
+      },
+      {
+        childtitle: "Department",
+        childlink: "department",
+      },
+      {
+        childtitle: "Employment",
+        childlink: "employment",
+      },
+    ],
+  },
+  {
     title: "suggestions",
     icon: "heroicons:qr-code-solid",
     link: "/suggestion",
-    isHide: true,
+   
   },
+
   {
     title: "Leaves Tracker",
     icon: "heroicons:calendar",
@@ -74,61 +129,61 @@ export const menuItems = [
       },
     ],
   },
-  {
-    title: "Attendance",
-    icon: "heroicons:calendar-days-20-solid",
-    link: "#",
-    child: [
-      {
-        childtitle: "Views",
-        childlink: "Level-1",
-        multi_menu: [
-          {
-            multiTitle: "List View",
-            multiLink: "Level-2",
-          },
-          {
-            multiTitle: "Tabular View",
-            multiLink: "Level-2.3",
-          },
-          {
-            multiTitle: "Calendar View",
-            multiLink: "Level-2.4",
-          },
-        ],
-      },
-      {
-        childtitle: "Shift Schedule",
-        childlink: " Level-2",
-        multi_menu: [
-          {
-            multiTitle: "Shift(s)",
-            multiLink: "Level-3.1",
-          },
-          {
-            multiTitle: "Employee Shift Mapping",
-            multiLink: "Level-3.2",
-          },
-          {
-            multiTitle: "Shift Calendar",
-            multiLink: "Level-3.3",
-          },
-          {
-            multiTitle: "Break",
-            multiLink: "Level-3.4",
-          },
-          {
-            multiTitle: "Shift Rotation",
-            multiLink: "Level-3.5",
-          },
-        ],
-      },
-      {
-        childtitle: "Settings",
-        childlink: "icons",
-      },
-    ],
-  },
+  // {
+  //   title: "Attendance",
+  //   icon: "heroicons:calendar-days-20-solid",
+  //   link: "#",
+  //   child: [
+  //     {
+  //       childtitle: "Views",
+  //       childlink: "Level-1",
+  //       multi_menu: [
+  //         {
+  //           multiTitle: "List View",
+  //           multiLink: "Level-2",
+  //         },
+  //         {
+  //           multiTitle: "Tabular View",
+  //           multiLink: "Level-2.3",
+  //         },
+  //         {
+  //           multiTitle: "Calendar View",
+  //           multiLink: "Level-2.4",
+  //         },
+  //       ],
+  //     },
+  //     {
+  //       childtitle: "Shift Schedule",
+  //       childlink: " Level-2",
+  //       multi_menu: [
+  //         {
+  //           multiTitle: "Shift(s)",
+  //           multiLink: "Level-3.1",
+  //         },
+  //         {
+  //           multiTitle: "Employee Shift Mapping",
+  //           multiLink: "Level-3.2",
+  //         },
+  //         {
+  //           multiTitle: "Shift Calendar",
+  //           multiLink: "Level-3.3",
+  //         },
+  //         {
+  //           multiTitle: "Break",
+  //           multiLink: "Level-3.4",
+  //         },
+  //         {
+  //           multiTitle: "Shift Rotation",
+  //           multiLink: "Level-3.5",
+  //         },
+  //       ],
+  //     },
+  //     {
+  //       childtitle: "Settings",
+  //       childlink: "icons",
+  //     },
+  //   ],
+  // },
   {
     title: "Organization",
     icon: "heroicons:calendar",
@@ -182,30 +237,7 @@ export const menuItems = [
     ],
   },
 
-  {
-    title: "Company",
-    icon: "heroicons:calendar",
-    isOpen: true,
-    isHide: true,
-    child: [
-      {
-        childtitle: "Company Profile",
-        childlink: "companyprofile",
-      },
-      {
-        childtitle: "Designation",
-        childlink: "designation",
-      },
-      {
-        childtitle: "Department",
-        childlink: "department",
-      },
-      {
-        childtitle: "Employment",
-        childlink: "employment",
-      },
-    ],
-  },
+  
 ];
 
 export const topMenu = [

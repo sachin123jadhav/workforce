@@ -1,9 +1,9 @@
 import React from 'react'
 
-function page() {
+function Reports() {
   return (
     <div>This is Reports page</div>
   )
 }
 
-export default page
+export default Reports
