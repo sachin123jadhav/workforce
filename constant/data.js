@@ -20,19 +20,19 @@ export const menuItems = [
   },
   {
     title: "Holiday",
-    icon: "heroicons:qr-code-solid",
+    icon: "fontisto:holiday-village",
     link: "/holiday",
     isHide: true,
   },
   {
     title: "QuickLink",
-    icon: "heroicons:qr-code-solid",
+    icon: "solar:link-broken",
     link: "/quicklink",
     isHide: true,
   },
   {
     title: "Announcement",
-    icon: "heroicons:qr-code-solid",
+    icon: "mdi:announcement",
     link: "/announcement",
     isHide: true,
   },
@@ -47,7 +47,7 @@ export const menuItems = [
   },
   {
     title: "Attendance",
-    icon: "heroicons:calendar",
+    icon: "tdesign:calendar-2",
     isOpen: true,
     isHide: true,
     child: [
@@ -66,7 +66,7 @@ export const menuItems = [
 
   {
     title: "Outstation",
-    icon: "heroicons:qr-code-solid",
+    icon: "gis:globe-user",
     link: "/outstation",
     isHide: true,
   },
