@@ -18,7 +18,46 @@ export const menuItems = [
     link: "custompage",
     isHide: true,
   },
-
+  {
+    title: "Attendance",
+    icon: "heroicons:calendar",
+    isOpen: true,
+    isHide: true,
+    child: [
+      {
+        childtitle: "Regulerization",
+        childlink: "/regulerization",
+      },
+      {
+        childtitle: "Reports",
+        childlink: "/reports",
+      },
+    ],
+  },
+  {
+    title: "Outstation",
+    icon: "heroicons:qr-code-solid",
+    link: "/outstation",
+    isHide: true,
+  },
+  {
+    title: "Componsetory Off",
+    icon: "heroicons:qr-code-solid",
+    link: "/compoff",
+    isHide: true,
+  },
+  {
+    title: "Leave",
+    icon: "heroicons:qr-code-solid",
+    link: "/leave",
+    isHide: true,
+  },
+  {
+    title: "suggestions",
+    icon: "heroicons:qr-code-solid",
+    link: "/suggestion",
+    isHide: true,
+  },
   {
     title: "Leaves Tracker",
     icon: "heroicons:calendar",
