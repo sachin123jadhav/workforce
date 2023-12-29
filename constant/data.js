@@ -37,14 +37,31 @@ export const menuItems = [
     isHide: true,
   },
 
-
-
   {
-    title: "Services",
+    title: "suggestions",
     icon: "heroicons:qr-code-solid",
-    link: "custompage",
+    link: "/suggestion",
+  },
+  {
+    title: "Outstation",
+    icon: "gis:globe-user",
+    link: "/outstation",
     isHide: true,
   },
+  {
+    title: "Componsetory Off",
+    icon: "heroicons:qr-code-solid",
+    link: "/compoff",
+    isHide: true,
+  },
+  {
+    title: "Leave",
+    icon: "heroicons:qr-code-solid",
+    link: "/leave",
+    isHide: true,
+  },
+
+  
   {
     title: "Attendance",
     icon: "tdesign:calendar-2",
@@ -74,7 +91,7 @@ export const menuItems = [
       {
         childtitle: "Leaves Admin",
         childlink: "leavesadmin",
-      },      
+      },
       {
         childtitle: "Outstation Admin",
         childlink: "outstationadmin",
@@ -82,72 +99,6 @@ export const menuItems = [
       {
         childtitle: "Regulerization Admin",
         childlink: "regulerizationadmin",
-      },
-    ],
-  },
-  
-  {
-    title: "Outstation",
-    icon: "gis:globe-user",
-    link: "/outstation",
-    isHide: true,
-  },
-  {
-    title: "Componsetory Off",
-    icon: "heroicons:qr-code-solid",
-    link: "/compoff",
-    isHide: true,
-  },
-  {
-    title: "Leave",
-    icon: "heroicons:qr-code-solid",
-    link: "/leave",
-    isHide: true,
-  },
-  {
-    title: "Company",
-    icon: "heroicons:calendar",
-    isOpen: true,
-    isHide: true,
-    child: [
-      {
-        childtitle: "Company Profile",
-        childlink: "companyprofile",
-      },
-      {
-        childtitle: "Designation",
-        childlink: "designation",
-      },
-      {
-        childtitle: "Department",
-        childlink: "department",
-      },
-      {
-        childtitle: "Employment",
-        childlink: "employment",
-      },
-    ],
-  },
-  {
-    title: "suggestions",
-    icon: "heroicons:qr-code-solid",
-    link: "/suggestion",
-   
-  },
-
-  {
-    title: "Leaves Tracker",
-    icon: "heroicons:calendar",
-    isOpen: true,
-    isHide: true,
-    child: [
-      {
-        childtitle: "Leaves",
-        childlink: "view",
-      },
-      {
-        childtitle: "Leave Applications",
-        childlink: "applications",
       },
     ],
   },
@@ -258,8 +209,30 @@ export const menuItems = [
       },
     ],
   },
-
-  
+  {
+    title: "Company",
+    icon: "heroicons:calendar",
+    isOpen: true,
+    isHide: true,
+    child: [
+      {
+        childtitle: "Company Profile",
+        childlink: "companyprofile",
+      },
+      {
+        childtitle: "Designation",
+        childlink: "designation",
+      },
+      {
+        childtitle: "Department",
+        childlink: "department",
+      },
+      {
+        childtitle: "Employment",
+        childlink: "employment",
+      },
+    ],
+  },
 ];
 
 export const topMenu = [
