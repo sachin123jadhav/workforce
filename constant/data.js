@@ -211,7 +211,7 @@ export const menuItems = [
   },
   {
     title: "Admin Settings",
-    icon: "tdesign:calendar-2",
+    icon: "material-symbols:admin-panel-settings",
     isOpen: true,
     isHide: true,
     child: [
