@@ -61,6 +61,30 @@ export const menuItems = [
       },
     ],
   },
+  {
+    title: "Approvals",
+    icon: "tdesign:calendar-2",
+    isOpen: true,
+    isHide: true,
+    child: [
+      {
+        childtitle: "Componsetory Off",
+        childlink: "compoffadmin",
+      },
+      {
+        childtitle: "Leaves Admin",
+        childlink: "leavesadmin",
+      },      
+      {
+        childtitle: "Outstation Admin",
+        childlink: "outstationadmin",
+      },
+      {
+        childtitle: "Regulerization Admin",
+        childlink: "regulerizationadmin",
+      },
+    ],
+  },
   
   {
     title: "Outstation",
