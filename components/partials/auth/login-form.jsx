@@ -1,5 +1,4 @@
-"use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Textinput from "@/components/ui/Textinput";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -8,7 +7,7 @@ import { useRouter } from "next/navigation";
 import Checkbox from "@/components/ui/Checkbox";
 import Link from "next/link";
 import { useSelector, useDispatch } from "react-redux";
-import { handleLogin } from "./store";
+import { LoginAction, handleLogin } from "./store";
 import { toast } from "react-toastify";
 const schema = yup
   .object({
@@ -30,27 +29,17 @@ const LoginForm = () => {
   });
   const router = useRouter();
   const onSubmit = (data) => {
-    const user = users.find(
-      (user) => user.email === data.email && user.password === data.password
-    );
-    if (user) {
-      dispatch(handleLogin(true));
-      setTimeout(() => {
-        router.push("/attendance");
-      }, 1500);
-    } else {
-      toast.error("Invalid credentials", {
-        position: "top-right",
-        autoClose: 1500,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
-    }
+    // console.log(data);
+    dispatch(LoginAction(data));
   };
+  const { isAuth } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    console.log("isAuth", isAuth);
+    if (isAuth.isLoggedIn) {
+      router.push("/home");
+    }
+  });
 
   const [checked, setChecked] = useState(false);
 
@@ -59,7 +48,7 @@ const LoginForm = () => {
       <Textinput
         name="email"
         label="email"
-        defaultValue="dashcode@gmail.com"
+        defaultValue=""
         type="email"
         register={register}
         error={errors?.email}
@@ -68,7 +57,7 @@ const LoginForm = () => {
         name="password"
         label="passwrod"
         type="password"
-        defaultValue="dashcode"
+        defaultValue=""
         register={register}
         error={errors.password}
       />

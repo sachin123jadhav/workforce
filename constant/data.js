@@ -3,90 +3,160 @@ export const menuItems = [
     title: "Dashboard",
     isHide: true,
     icon: "heroicons:home-solid",
-    link: "dashboard",
+    link: "/home",
+  },
+  {
+    title: "Staff",
+    isHide: true,
+    icon: "heroicons:user-solid",
+    link: "/staff",
   },
 
   {
-    title: "Services",
+    title: "Event",
     icon: "heroicons:qr-code-solid",
-    link: "services",
+    link: "/event",
     isHide: true,
-    
   },
+  {
+    title: "Holiday",
+    icon: "fontisto:holiday-village",
+    link: "/holiday",
+    isHide: true,
+  },
+  {
+    title: "QuickLink",
+    icon: "solar:link-broken",
+    link: "/quicklink",
+    isHide: true,
+  },
+  {
+    title: "Announcement",
+    icon: "mdi:announcement",
+    link: "/announcement",
+    isHide: true,
+  },
+
+  {
+    title: "suggestions",
+    icon: "heroicons:qr-code-solid",
+    link: "/suggestion",
+  },
+  {
+    title: "Outstation",
+    icon: "gis:globe-user",
+    link: "/outstation",
+    isHide: true,
+  },
+  {
+    title: "Componsetory Off",
+    icon: "heroicons:qr-code-solid",
+    link: "/compoff",
+    isHide: true,
+  },
+  {
+    title: "Leave",
+    icon: "heroicons:qr-code-solid",
+    link: "/leave",
+    isHide: true,
+  },
+
   
   {
-    title: "Leaves Tracker",
-    icon: "heroicons:calendar",
+    title: "Attendance",
+    icon: "tdesign:calendar-2",
     isOpen: true,
     isHide: true,
     child: [
       {
-        childtitle: "Leaves",
-        childlink: "view",
+        childtitle: "Regulerization",
+        childlink: "regulerization",
       },
       {
-        childtitle: "Leave Applications",
-        childlink: "applications",
+        childtitle: "Reports",
+        childlink: "reports",
       },
-       
     ],
   },
   {
-    title: "Attendance",
-    icon: "heroicons:calendar-days-20-solid",
-    link: "#",
+    title: "Approvals",
+    icon: "tdesign:calendar-2",
+    isOpen: true,
+    isHide: true,
     child: [
-      
       {
-        childtitle: "Views",
-        childlink: "Level-1",
-        multi_menu: [
-          {
-            multiTitle: "List View",
-            multiLink: "Level-2",
-          },
-          {
-            multiTitle: "Tabular View",
-            multiLink: "Level-2.3",
-          },
-          {
-            multiTitle: "Calendar View",
-            multiLink: "Level-2.4",
-          },
-        ],
+        childtitle: "Componsetory Off",
+        childlink: "compoffadmin",
       },
       {
-        childtitle: "Shift Schedule",
-        childlink: " Level-2",
-        multi_menu: [
-          {
-            multiTitle: "Shift(s)",
-            multiLink: "Level-3.1",
-          },
-          {
-            multiTitle: "Employee Shift Mapping",
-            multiLink: "Level-3.2",
-          },
-          {
-            multiTitle: "Shift Calendar",
-            multiLink: "Level-3.3",
-          },
-          {
-            multiTitle: "Break",
-            multiLink: "Level-3.4",
-          },
-          {
-            multiTitle: "Shift Rotation",
-            multiLink: "Level-3.5",
-          },
-        ],
+        childtitle: "Leaves Admin",
+        childlink: "leavesadmin",
       },
       {
-        childtitle: "Settings",
-        childlink: "icons",
+        childtitle: "Outstation Admin",
+        childlink: "outstationadmin",
+      },
+      {
+        childtitle: "Regulerization Admin",
+        childlink: "regulerizationadmin",
       },
     ],
   },
+  // {
+  //   title: "Attendance",
+  //   icon: "heroicons:calendar-days-20-solid",
+  //   link: "#",
+  //   child: [
+  //     {
+  //       childtitle: "Views",
+  //       childlink: "Level-1",
+  //       multi_menu: [
+  //         {
+  //           multiTitle: "List View",
+  //           multiLink: "Level-2",
+  //         },
+  //         {
+  //           multiTitle: "Tabular View",
+  //           multiLink: "Level-2.3",
+  //         },
+  //         {
+  //           multiTitle: "Calendar View",
+  //           multiLink: "Level-2.4",
+  //         },
+  //       ],
+  //     },
+  //     {
+  //       childtitle: "Shift Schedule",
+  //       childlink: " Level-2",
+  //       multi_menu: [
+  //         {
+  //           multiTitle: "Shift(s)",
+  //           multiLink: "Level-3.1",
+  //         },
+  //         {
+  //           multiTitle: "Employee Shift Mapping",
+  //           multiLink: "Level-3.2",
+  //         },
+  //         {
+  //           multiTitle: "Shift Calendar",
+  //           multiLink: "Level-3.3",
+  //         },
+  //         {
+  //           multiTitle: "Break",
+  //           multiLink: "Level-3.4",
+  //         },
+  //         {
+  //           multiTitle: "Shift Rotation",
+  //           multiLink: "Level-3.5",
+  //         },
+  //       ],
+  //     },
+  //     {
+  //       childtitle: "Settings",
+  //       childlink: "icons",
+  //     },
+  //   ],
+  // },
   {
     title: "Organization",
     icon: "heroicons:calendar",
@@ -137,18 +207,57 @@ export const menuItems = [
         childtitle: "Settings",
         childlink: "applications",
       },
-       
     ],
   },
- 
-
-
-
-
-
+  {
+    title: "Admin Settings",
+    icon: "material-symbols:admin-panel-settings",
+    isOpen: true,
+    isHide: true,
+    child: [
+      {
+        childtitle: "Announcment",
+        childlink: "announcementadmin",
+      },
+      {
+        childtitle: "Event",
+        childlink: "eventadmin",
+      },
+      {
+        childtitle: "Holiday",
+        childlink: "holidayadmin",
+      },
+      {
+        childtitle: "Quicklink",
+        childlink: "quicklinkadmin",
+      },
+    ],
+  },
+  {
+    title: "Company",
+    icon: "heroicons:calendar",
+    isOpen: true,
+    isHide: true,
+    child: [
+      {
+        childtitle: "Company Profile",
+        childlink: "companyprofile",
+      },
+      {
+        childtitle: "Designation",
+        childlink: "designation",
+      },
+      {
+        childtitle: "Department",
+        childlink: "department",
+      },
+      {
+        childtitle: "Employment",
+        childlink: "employment",
+      },
+    ],
+  },
 ];
-
-
 
 export const topMenu = [
   {
@@ -711,33 +820,30 @@ export const files = [
   },
 ];
 
-
- export const birthdaysData = [
+export const birthdaysData = [
   {
-    id:1,
-    date: '15 Oct',
-    name: 'Parmeshwar',
-    title: 'Software Engineer',
+    id: 1,
+    date: "15 Oct",
+    name: "Parmeshwar",
+    title: "Software Engineer",
   },
   {
-    id:2,
-    date: '18 Oct',
-    name: 'Siddhesh',
-    title: 'Frontend Developer',
+    id: 2,
+    date: "18 Oct",
+    name: "Siddhesh",
+    title: "Frontend Developer",
   },
   {
-    id:3,
-    date: '28 Oct',
-    name: 'Amol',
-    title: 'Admin',
+    id: 3,
+    date: "28 Oct",
+    name: "Amol",
+    title: "Admin",
   },
-  
 ];
-
 
 export const userData = [
   {
-    id:1,
+    id: 1,
     title: "Active Users",
     count: "212",
     bgColor: "bg-gradient-to-r from-[#1d976c] to-[#2fd38a]",
@@ -745,7 +851,7 @@ export const userData = [
     icon: "fa:users",
   },
   {
-    id:2,
+    id: 2,
     title: "Not Logged In",
     count: "35",
     bgColor: "bg-gradient-to-r from-[#664dc9] to-[#664dc999]",
@@ -753,59 +859,50 @@ export const userData = [
     icon: "fa6-solid:users-slash",
   },
   {
-    id:3,
+    id: 3,
     title: "On Leave",
     count: "05",
     bgColor: "bg-gradient-to-r from-[#4669fa] to-[#4669fa]",
     iconColor: "text-[#fa5420]",
     icon: "gis:globe-users",
   },
-  
 ];
-
-
 
 export const newHires = [
   {
-    id:1,
-    name: 'Parmeshwar',
-    title: 'Software Engineer',
-    image:'./assets/images/avatar/parmeshwar.jpg',
+    id: 1,
+    name: "Parmeshwar",
+    title: "Software Engineer",
+    image: "./assets/images/avatar/parmeshwar.jpg",
   },
   {
-    id:2,
-    name: 'Siddhesh',
-    title: 'Frontend Developer',
-    image:'./assets/images/avatar/siddhesh.jpg',
+    id: 2,
+    name: "Siddhesh",
+    title: "Frontend Developer",
+    image: "./assets/images/avatar/siddhesh.jpg",
   },
   {
-    id:3,
-    name: 'Amol',
-    title: 'Admin',
-    image:'./assets/images/avatar/user.jpeg',
+    id: 3,
+    name: "Amol",
+    title: "Admin",
+    image: "./assets/images/avatar/user.jpeg",
   },
-  
 ];
-
 
 export const upcomingHolidays = [
   {
-    id:1,
-    name: 'Dussehra',
-    date: '24 Oct',
-    
+    id: 1,
+    name: "Dussehra",
+    date: "24 Oct",
   },
   {
-    id:2,
-    name: 'Diwali',
-    date: '12 Nov',
-    
+    id: 2,
+    name: "Diwali",
+    date: "12 Nov",
   },
   {
-    id:3,
-    name: 'Bhai Duj',
-    date: '15 Nov',
-    
+    id: 3,
+    name: "Bhai Duj",
+    date: "15 Nov",
   },
-  
 ];

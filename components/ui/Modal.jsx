@@ -17,6 +17,7 @@ const Modal = ({
   uncontrol,
   label = "Basic Modal",
   labelClass,
+  // closeModal,
   ref,
 }) => {
   const [showModal, setShowModal] = useState(false);

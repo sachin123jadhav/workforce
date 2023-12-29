@@ -20,8 +20,8 @@ const Login2 = () => {
                     <img
                       src={
                         isDark
-                          ? "assets/images/logo/meta-logo.svg"
-                          : "/assets/images/logo/meta-logo.svg"
+                          ? "assets/images/logo/logo-white.svg"
+                          : "/assets/images/logo/logo.svg"
                       }
                       alt=""
                       className="mx-auto"
@@ -68,7 +68,7 @@ const Login2 = () => {
               <div className="flex-1 flex flex-col justify-center items-center">
                 <Link href="/">
                   <img
-                    src="assets/images/logo/meta-logo.svg"
+                    src="assets/images/logo/logo-white.svg"
                     alt=""
                     className="mb-10"
                   />
