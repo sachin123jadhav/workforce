@@ -62,8 +62,6 @@ export const menuItems = [
     ],
   },
   
-
-
   {
     title: "Outstation",
     icon: "gis:globe-user",
