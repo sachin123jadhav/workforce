@@ -3,7 +3,7 @@ import React from 'react'
 const eventadmin = () => {
   return (
     <div>
-             eventadmin
+         eventadmin
     </div>
   )
 }

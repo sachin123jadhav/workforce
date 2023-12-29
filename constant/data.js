@@ -210,6 +210,30 @@ export const menuItems = [
     ],
   },
   {
+    title: "Admin Settings",
+    icon: "tdesign:calendar-2",
+    isOpen: true,
+    isHide: true,
+    child: [
+      {
+        childtitle: "Announcment",
+        childlink: "announcementadmin",
+      },
+      {
+        childtitle: "Event",
+        childlink: "eventadmin",
+      },
+      {
+        childtitle: "Holiday",
+        childlink: "holidayadmin",
+      },
+      {
+        childtitle: "Quicklink",
+        childlink: "quicklinkadmin",
+      },
+    ],
+  },
+  {
     title: "Company",
     icon: "heroicons:calendar",
     isOpen: true,

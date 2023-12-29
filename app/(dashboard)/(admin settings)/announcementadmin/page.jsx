@@ -1,7 +1,11 @@
-import React from "react";
+import React from 'react'
 
-const announcementadmin = () => {
-  return <div>announcementadmin</div>;
-};
+const page = () => {
+  return (
+    <div>
+      announcement admin
+    </div>
+  )
+}
 
-export default announcementadmin;
+export default page
