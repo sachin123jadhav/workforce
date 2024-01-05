@@ -10,6 +10,7 @@ import companyprofile from "./companyprofile";
 import mapdata from "./mapdata";
 import userList from "./userlist";
 import staff from "./staff";
+import allevent from "./allevent";
 const rootReducer = combineReducers({
   layout,
   auth,
@@ -22,5 +23,6 @@ const rootReducer = combineReducers({
   mapdata,
   userList,
   staff,
+  allevent,
 });
 export default rootReducer;

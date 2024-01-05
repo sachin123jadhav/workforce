@@ -1,13 +1,15 @@
 "use client"
+import EmployeeDashboard from '@/components/Dashboard/employeeDashboard/EmployeeDashboard';
 import React from 'react'
-import employeeDashboard from '@/components/Dashboard/employeeDashboard/employeeDashboard';
 
-const page = (params) => {
-  const id = params.EmployeeDashboard;
-  console.log(id)
+
+const page = ({params}) => {
+  const user_id = params.EmployeeDashboard;
+ 
   return (
     <>
-    <employeeDashboard></employeeDashboard>
+  
+      <EmployeeDashboard user_id = {user_id} /> 
     </>
   )
 }
