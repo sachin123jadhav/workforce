@@ -188,7 +188,7 @@ const AssignEvents = () => {
                 <DataTable
                     TABLE_COLUMNS={TABLE_COLUMNS}
                     TABLE_ROWS={TABLE_ROWS}
-                    title="Staff List"
+                    title="Event List"
                 //   TableModal={StaffModal}
                 />
             )}
