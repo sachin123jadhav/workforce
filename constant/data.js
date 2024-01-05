@@ -14,7 +14,7 @@ export const menuItems = [
 
   {
     title: "Event",
-    icon: "heroicons:qr-code-solid",
+    icon: "game-icons:red-carpet",
     link: "/event",
     isHide: true,
   },
