@@ -197,7 +197,7 @@ const AssignHoliday = () => {
     });
     return (
         <>
-            {loader ? "loading" : userRoles?.data?.event?.event?.includes("Show") ?
+            {loader ? "loading" : userRoles?.data?.holiday?.holiday?.includes("Show") ?
                 TABLE_ROWS && TABLE_COLUMNS && (
                     <DataTable
                         TABLE_COLUMNS={TABLE_COLUMNS}
