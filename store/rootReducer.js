@@ -13,6 +13,9 @@ import staff from "./staff";
 import allevent from "./allevent";
 import userrole from "./userrole";
 import allholiday from "./allholiday";
+import allquicklinks from "./allquicklinks";
+
+
 const rootReducer = combineReducers({
   layout,
   auth,
@@ -28,5 +31,6 @@ const rootReducer = combineReducers({
   allevent,
   userrole,
   allholiday,
+  allquicklinks,
 });
 export default rootReducer;
