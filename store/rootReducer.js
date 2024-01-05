@@ -11,6 +11,8 @@ import mapdata from "./mapdata";
 import userList from "./userlist";
 import staff from "./staff";
 import allevent from "./allevent";
+import userrole from "./userrole";
+import allholiday from "./allholiday";
 const rootReducer = combineReducers({
   layout,
   auth,
@@ -24,5 +26,7 @@ const rootReducer = combineReducers({
   userList,
   staff,
   allevent,
+  userrole,
+  allholiday,
 });
 export default rootReducer;

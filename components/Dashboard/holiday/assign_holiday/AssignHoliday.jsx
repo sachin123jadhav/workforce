@@ -8,7 +8,7 @@ import DataTable from "@/components/partials/table/datatable";
 import Icon from "@/components/ui/Icon";
 import Textinput from "@/components/ui/Textinput";
 import Tooltip from "@/components/ui/Tooltip";
-import { getAssignEventsData, eventAssignSelector } from "@/store/allevent";
+import { getAssignHolidayData, assingholidaySelector } from "@/store/allholiday";
 import Link from "next/link";
 import moment from "moment";
 import { getuserroleData, userRolesSelector } from "@/store/userrole";
@@ -40,37 +40,39 @@ const handleDownload = async (fileUrl) => {
       console.error('Error downloading file:', error);
     }
   };
-const AssignEvents = () => {
+  
+
+
+
+const AssignHoliday = () => {
+
     const dispatch = useDispatch();
     const router = useRouter();
     const [loader, setLoader] = useState(true);
     const token = useSelector((state) => state.auth.isAuth.token);
-    const [eventData, setEventData] = useState([]);
+    const [holidayData, setHolidayData] = useState([]);
     const userRoles = useSelector(userRolesSelector);
-    const eventdataSelector = useSelector(eventAssignSelector);
+    const holidaydataSelector = useSelector(assingholidaySelector);
 
-
-
-    console.log("userRoles", userRoles)
     useEffect(() => {
 
-        dispatch(getAssignEventsData(token, setLoader));
+        dispatch(getAssignHolidayData(token, setLoader));
         dispatch(getuserroleData(token));
     }, []);
 
     useEffect(() => {
         if (userRoles) {
-            dispatch(getAssignEventsData(token, setLoader));
+            dispatch(getAssignHolidayData(token, setLoader));
         }
     }, [userRoles]);
 
     useEffect(() => {
-        if (eventdataSelector) {
-            setEventData(eventdataSelector);
+        if (holidaydataSelector) {
+            setHolidayData(holidaydataSelector);
         }
-    }, [eventdataSelector]);
+    }, [holidaydataSelector]);
 
-    console.log(eventData)
+    console.log(holidayData)
 
     const TABLE_COLUMNS = [
         // Removed the checkbox column
@@ -83,21 +85,21 @@ const AssignEvents = () => {
         },
 
         {
-            Header: "Events",
-            accessor: "event",
+            Header: "Holiday",
+            accessor: "holiday",
             Cell: (row) => {
                 return (
                     <div>
                         <span className="inline-flex items-center">
                             <span className="w-7 h-7 rounded-full ltr:mr-3 rtl:ml-3 flex-none bg-slate-600">
                                 <img
-                                    src={row?.cell?.value.event_image}
+                                    src={row?.cell?.value.holiday_image}
                                     alt=""
                                     className="object-contain w-full h-full rounded-full"
                                 />
                             </span>
                             <span className="text-md text-slate-600 dark:text-slate-300 capitalize">
-                                {row?.cell?.value.event_name}
+                                {row?.cell?.value.holiday_name}
                             </span>
                         </span>
                     </div>
@@ -105,21 +107,12 @@ const AssignEvents = () => {
             },
         },
         {
-            Header: "Event Description",
-            accessor: "event_description",
+            Header: "Holiday Description",
+            accessor: "holiday_description",
             Cell: (row) => {
                 return <span>{row?.cell?.value}</span>;
             },
         },
-        {
-            Header: "Event Location",
-            accessor: "event_location",
-            Cell: (row) => {
-                return <span>{row?.cell?.value}</span>;
-            },
-        },
-
-
 
         {
             Header: "Start Date",
@@ -137,8 +130,8 @@ const AssignEvents = () => {
         },
 
         {
-            Header: "Event Document",
-            accessor: "event_document",
+            Header: "Holiday Document",
+            accessor: "holiday_document",
             Cell: (row) => {
                 return <span >{row?.cell?.value}</span>;
             },
@@ -146,7 +139,7 @@ const AssignEvents = () => {
 
     ];
 
-    const TABLE_ROWS = eventData?.data?.map((item, index) => {
+    const TABLE_ROWS = holidayData?.data?.map((item, index) => {
         console.log(item)
         return {
             item: item,
@@ -154,17 +147,17 @@ const AssignEvents = () => {
 
 
 
-            event: {
-                event_name: item?.event_name,
-                event_image: item?.event_image
-                    ? `${API_HOST}${item?.event_image}`
+            holiday: {
+                holiday_name: item?.holiday_name,
+                holiday_image: item?.holiday_image
+                    ? `${API_HOST}${item?.holiday_image}`
                     : "/assets/images/avatar/user.png",
             },
-            event_description: item.event_description,
+            holiday_description: item.holiday_description,
             event_location: item.event_location,
             end_date: moment(item?.end_date).format("MMMM Do YYYY, h:mm a"),
             start_date: moment(item?.start_date).format("MMMM Do YYYY, h:mm a"),
-            event_document: item?.document
+            holiday_document: item?.document
                 // ? `${API_HOST}${item?.document}`
                 ? (
                     <>
@@ -195,27 +188,26 @@ const AssignEvents = () => {
                             {/* Add other buttons or components as needed */}
                         </div>
                     </>
+
                 )
                 : null,
 
 
         };
     });
-
     return (
         <>
-            {userRoles?.data?.event?.event?.includes("Show") ?
+            {loader ? "loading" : userRoles?.data?.event?.event?.includes("Show") ?
                 TABLE_ROWS && TABLE_COLUMNS && (
                     <DataTable
                         TABLE_COLUMNS={TABLE_COLUMNS}
                         TABLE_ROWS={TABLE_ROWS}
-                        title="Event List"
+                        title="Holiday List"
                     //   TableModal={StaffModal}
                     />
                 ) : "You Dont Have Permission"}
-
         </>
     )
 }
 
-export default AssignEvents
+export default AssignHoliday

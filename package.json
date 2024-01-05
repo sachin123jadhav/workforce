@@ -33,7 +33,7 @@
     "framer-motion": "^10.10.0",
     "leaflet": "^1.9.3",
     "leaflet-search": "^4.0.0",
-    "moment": "^2.29.4",
+    "moment": "^2.30.1",
     "next": "13.2.4",
     "npm": "^10.2.5",
     "react": "18.2.0",
