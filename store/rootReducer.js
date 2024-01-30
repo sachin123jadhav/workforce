@@ -14,6 +14,7 @@ import allevent from "./allevent";
 import userrole from "./userrole";
 import allholiday from "./allholiday";
 import allquicklinks from "./allquicklinks";
+import outstation from "./outstation";
 
 
 const rootReducer = combineReducers({
@@ -32,5 +33,6 @@ const rootReducer = combineReducers({
   userrole,
   allholiday,
   allquicklinks,
+  outstation,
 });
 export default rootReducer;
