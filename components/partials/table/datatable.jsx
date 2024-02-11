@@ -53,7 +53,7 @@ const DataTable = ({
 
   return (
     <>
-      <Card>
+      <Card className="rounded-lg shadow-lg">
         <div className="md:flex justify-between items-center mb-4">
           <h4 className="card-title">{title}</h4>
           <div> </div>
@@ -69,7 +69,7 @@ const DataTable = ({
                 className="min-w-full divide-y divide-slate-100 table-fixed dark:divide-slate-700"
                 {...getTableProps}
               >
-                <thead className="bg-sky-800  dark:bg-slate-700">
+                <thead className=" dark:bg-slate-700" style={{'backgroundColor':'#8c57ff'}}>
                   {headerGroups.map((headerGroup) => (
                     <tr
                       key={headerGroup.id}
