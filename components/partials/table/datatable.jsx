@@ -53,7 +53,8 @@ const DataTable = ({
 
   return (
     <>
-      <Card className="rounded-lg shadow-lg">
+      {/* <Card className="rounded-lg shadow-lg bg-white border border-purple-100"> */}
+      <Card className="rounded-lg bg-opacity-20 backdrop-blur-lg shadow-purple">
         <div className="md:flex justify-between items-center mb-4">
           <h4 className="card-title">{title}</h4>
           <div> </div>
@@ -69,7 +70,7 @@ const DataTable = ({
                 className="min-w-full divide-y divide-slate-100 table-fixed dark:divide-slate-700"
                 {...getTableProps}
               >
-                <thead className=" dark:bg-slate-700" style={{'backgroundColor':'#8c57ff'}}>
+                <thead className="bg-gray-400 dark:bg-slate-700" >
                   {headerGroups.map((headerGroup) => (
                     <tr
                       key={headerGroup.id}
@@ -108,7 +109,7 @@ const DataTable = ({
                       <tr
                         key={key}
                         {...restRowProps}
-                        className="even:bg-gray-200 even:dark:bg-slate-600 dark:divide-slate-500"
+                        // className="even:bg-gray-200 even:dark:bg-slate-600 dark:divide-slate-500"
                       >
                         {row.cells.map((cell) => (
                           <td
