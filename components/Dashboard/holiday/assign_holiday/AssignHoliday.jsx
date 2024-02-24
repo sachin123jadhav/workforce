@@ -12,35 +12,36 @@ import { getAssignHolidayData, assingholidaySelector } from "@/store/allholiday"
 import Link from "next/link";
 import moment from "moment";
 import { getuserroleData, userRolesSelector } from "@/store/userrole";
+import Select, { components } from "react-select";
 
 
 const handleDownload = async (fileUrl) => {
     try {
-      // Extract the filename from the URL
-      const filename = fileUrl.substring(fileUrl.lastIndexOf('/') + 1);
-  
-      // Fetch the file as a blob
-      const response = await fetch(fileUrl);
-      const blob = await response.blob();
-  
-      // Create a temporary URL for the blob
-      const blobUrl = URL.createObjectURL(blob);
-  
-      // Creating a link and simulating a click to initiate the download
-      const link = document.createElement('a');
-      link.href = blobUrl;
-      link.download = filename; // Use the extracted filename
-      document.body.appendChild(link);
-      link.click();
-  
-      // Clean up: remove the link and revoke the blob URL
-      document.body.removeChild(link);
-      URL.revokeObjectURL(blobUrl);
+        // Extract the filename from the URL
+        const filename = fileUrl.substring(fileUrl.lastIndexOf('/') + 1);
+
+        // Fetch the file as a blob
+        const response = await fetch(fileUrl);
+        const blob = await response.blob();
+
+        // Create a temporary URL for the blob
+        const blobUrl = URL.createObjectURL(blob);
+
+        // Creating a link and simulating a click to initiate the download
+        const link = document.createElement('a');
+        link.href = blobUrl;
+        link.download = filename; // Use the extracted filename
+        document.body.appendChild(link);
+        link.click();
+
+        // Clean up: remove the link and revoke the blob URL
+        document.body.removeChild(link);
+        URL.revokeObjectURL(blobUrl);
     } catch (error) {
-      console.error('Error downloading file:', error);
+        console.error('Error downloading file:', error);
     }
-  };
-  
+};
+
 
 
 
@@ -195,6 +196,30 @@ const AssignHoliday = () => {
 
         };
     });
+    const styles = {
+        multiValue: (base, state) => {
+          return state.data.isFixed ? { ...base, opacity: "0.5" } : base;
+        },
+        multiValueLabel: (base, state) => {
+          return state.data.isFixed
+            ? { ...base, color: "#626262", paddingRight: 6 }
+            : base;
+        },
+        multiValueRemove: (base, state) => {
+          return state.data.isFixed ? { ...base, display: "none" } : base;
+        },
+        option: (provided, state) => ({
+          ...provided,
+          fontSize: "14px",
+        }),
+      };
+    const fruits = [
+        { value: "chocolate", label: "Chocolate" },
+        { value: "strawberry", label: "Strawberry" },
+        { value: "vanilla", label: "Vanilla" },
+        { value: "orange", label: "Orange" },
+        { value: "apple", label: "Apple" },
+      ];
     return (
         <>
             {loader ? "loading" : userRoles?.data?.holiday?.holiday?.includes("Show") ?
@@ -206,6 +231,20 @@ const AssignHoliday = () => {
                     //   TableModal={StaffModal}
                     />
                 ) : "You Dont Have Permission"}
+
+
+            <Select
+                isClearable={false}
+                closeMenuOnSelect={false}
+                // components={animatedComponents}
+                defaultValue={[fruits[4], fruits[5]]}
+                isMulti
+                options={fruits}
+                styles={styles}
+                className="react-select"
+                classNamePrefix="select"
+                id="animated_1"
+            />
         </>
     )
 }
